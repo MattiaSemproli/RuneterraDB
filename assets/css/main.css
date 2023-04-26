@@ -99,12 +99,10 @@ input, select, textarea {
 	}
 
 	body {
-		background-image: url("../../Sources/RuneterraBG.png");
+		background-image: url("../../Sources/RuneterraBG_blurred_2px.png");
 		background-size: cover;
-		background-attachment: fixed,
- fixed;
-		background-position: center,
- center;
+		background-attachment: fixed,fixed;
+		background-position: center, center;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -271,6 +269,20 @@ input, select, textarea {
 			padding-bottom: 1em;
 			border-bottom: solid 2px rgba(255, 255, 255, 0.125);
 		}
+
+	#lol {
+		-webkit-text-stroke-width: 1.5px;
+		-webkit-text-stroke-color: black;
+		background: -webkit-linear-gradient(rgba(187,163,99), rgba(101,82,49));
+		-webkit-background-clip: text;
+		font-size: 2.5em;
+		-webkit-text-fill-color: transparent;
+		font-family: Raleway, Helvetica, sans-serif;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		margin: 0 0 1em 0;
+		text-transform: uppercase;
+	}
 
 	h2 {
 		font-size: 1.2em;
@@ -3074,7 +3086,7 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out;
-		background-color: rgba(53, 56, 73, 0.95);
+		background-color: transparent;
 		height: 3.5em;
 		left: 0;
 		line-height: 3.5em;
@@ -3103,7 +3115,7 @@ input, select, textarea {
 
 		#header nav {
 			font-family: Raleway, Helvetica, sans-serif;
-			font-size: 0.8em;
+			font-size: 0.9em;
 			font-weight: 700;
 			height: 3em;
 			letter-spacing: 0.1em;
@@ -3256,7 +3268,7 @@ input, select, textarea {
 		-ms-user-select: none;
 		user-select: none;
 		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-		background: rgba(46, 49, 65, 0.8);
+		background: rgba(46, 49, 65, 0.7);
 		cursor: default;
 		height: 100%;
 		left: 0;
@@ -3376,7 +3388,7 @@ input, select, textarea {
 /* Banner */
 
 	#banner {
-		padding: 3em 0 4.75em 0 ;
+		padding: 7em 0 4.75em 0 ;
 	}
 
 		#banner .inner {
@@ -3394,7 +3406,7 @@ input, select, textarea {
 			-ms-transform: translateY(0);
 			transform: translateY(0);
 			opacity: 1;
-			margin: 0 0 1.3em 0;
+			margin: 0 0 0 0;
 		}
 
 			#banner .logo .icon {
@@ -3427,8 +3439,6 @@ input, select, textarea {
 			-ms-filter: blur(0);
 			filter: blur(0);
 			opacity: 1;
-			border-bottom: solid 2px rgba(255, 255, 255, 0.125);
-			font-size: 2.25em;
 			margin-bottom: 0.8em;
 			padding-bottom: 0.4em;
 		}
@@ -4000,7 +4010,6 @@ input, select, textarea {
 /* Footer */
 
 	#footer .inner {
-		padding: 5em 0 3em 0 ;
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -4026,9 +4035,7 @@ input, select, textarea {
 		}
 
 		#footer .inner .copyright {
-			border-top: solid 2px rgba(255, 255, 255, 0.125);
 			list-style: none;
-			margin: 4em 0 2em 0;
 			padding: 2em 0 0 0;
 			width: 100%;
 		}
@@ -4135,16 +4142,9 @@ input, select, textarea {
 		}
 
 	}
-
-	#footer {
+	  
+	footer {
+		position: fixed;
 		bottom: 0;
-		height: 100px;
-		left: 0;
-		position: absolute;
 		width: 100%;
-	}
-
-	#main-wrapper {
-		padding: 0 0 100px;
-		position: relative;
-	}
+	 }
