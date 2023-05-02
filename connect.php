@@ -1,9 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "runeterradb";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    //php variables for db connection.h
+    $servername = "localhost";
+    $username = "root";
+    $password = "MpMs";
+    $dbname = "runeterradb";
 ?>
