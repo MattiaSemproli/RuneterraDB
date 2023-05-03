@@ -7,54 +7,14 @@
 <html>
 
 	<head>
-		<title>RuneterraDB | Log-in</title>
+		<title>RuneterraDB | to set</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/centerBox.css" />
 		<noscript>
 			<link rel="stylesheet" href="assets/css/noscript.css" />
 		</noscript>
-		<style>
-			.login-form {
-				background-color: rgba(255, 255, 255, 0.7);
-				padding: 20px;
-				border-radius: 10px;
-				box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-				margin: auto;
-				width: 300px;
-				height: 200px;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-			}
-
-			input[type="text"],
-			input[type="password"] {
-				display: block;
-				margin: 10px 0;
-				padding: 10px;
-				width: 100%;
-				border-radius: 5px;
-				border: none;
-				font-size: 16px;
-			}
-
-			input[type="submit"] {
-				background-color: #333;
-				color: #fff;
-				border: none;
-				border-radius: 5px;
-				padding: 10px 20px;
-				font-size: 16px;
-				cursor: pointer;
-			}
-
-			input[type="submit"]:hover {
-				background-color: #555;
-			}
-		</style>
 	</head>
 
 	<body class="is-preload">
@@ -73,28 +33,57 @@
 				<h2>Menu</h2>
 				<ul class="links">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="gtc.html">Guess the champion</a></li>
 					<li><a href="elements.html">Elements</a></li>
+					<li><a href="login.html">Log In</a></li>
 					<li><a href="registration.html">Sign Up</a></li>
 				</ul>
 				<a href="#" class="close">Close</a>
 			</div>
 		</nav>
 
-		<!-- Banner -->
-		<section id="banner">
-			<div class="inner">
-				<form action="index.html" method="POST">
-					<label for="username">Username:</label>
-					<input type="text" value="Inserisci il nome" name="username">
+		<!-- Center -->
+		<div id="guess-the-champion">
+			<form>
+				<input type="text" id="champion-name" name="champion-name" placeholder="Enter champion name ...."
+					list="client-list" autocomplete="off">
+				<datalist id="client-list">
+					<option value="fede">
+					<option value="franci">
+					<option value="giova">
+					<option value="gion">
+					<option value="jonny">
+				</datalist>
+				<button type="submit" id="submit-Button" disabled>Submit</button>
+			</form>
+			<ul id="champions-list">
+			</ul>
+		</div>
 
-					<label for="password">Password:</label>
-					<input type="password" id="password" name="password">
+		<script>
+			const form = document.querySelector('form');
+			const champsList = document.getElementById('champions-list');
+			const input = document.getElementById('champion-name');
+			const datalist = document.getElementById('client-list');
+			const options = Array.from(datalist.options).map(option => option.value);
+			const submitBtn = document.getElementById('submit-Button');
 
-					<input type="submit" value="Login">
-				</form>
-			</div>
-		</section>
+			form.addEventListener('submit', event => {
+				event.preventDefault();
+
+				const newChampItem = document.createElement('li');
+				newChampItem.textContent = input.value;
+				champsList.appendChild(newChampItem);
+				form.reset();
+			});
+
+			input.addEventListener('input', () => {
+				if (options.includes(input.value)) {
+					submitBtn.disabled = false;
+				} else {
+					submitBtn.disabled = true;
+				}
+			});
+		</script>
 
 		<!-- Footer -->
 		<footer id="footer">
