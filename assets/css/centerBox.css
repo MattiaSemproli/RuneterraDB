@@ -1,0 +1,27 @@
+/* Style the form */
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#guess-the-champion {
+    margin: 200px auto 0;
+    list-style-type: none;
+    padding: 0;
+    width: 20%;
+    text-align: center;
+}
+
+/* Style the client list */
+#champions-list {
+    margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+#champions-list li {
+    margin-bottom: 10px;
+}

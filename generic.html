@@ -9,7 +9,8 @@
 		<title>RuneterraDB | to set</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main.css"/>
+		<link rel="stylesheet" href="assets/css/centerBox.css"/>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -36,6 +37,49 @@
 						</div>
 					</nav>
 					
+				<!-- Center -->
+				<div id="guess-the-champion">
+					<form>
+						<input type="text" id="champion-name" name="champion-name" placeholder="Enter champion name ...." list="client-list" autocomplete="off">
+							<datalist id="client-list">
+								<option value="fede">
+								<option value="franci">
+								<option value="giova">
+								<option value="gion">
+								<option value="jonny">
+							</datalist>
+						<button type="submit" id="submit-Button" disabled>Submit</button>
+					</form>
+					<ul id="champions-list">
+					</ul>
+				</div>
+
+					<script>
+						const form = document.querySelector('form');
+						const champsList = document.getElementById('champions-list');
+						const input = document.getElementById('champion-name');
+						const datalist = document.getElementById('client-list');
+						const options = Array.from(datalist.options).map(option => option.value);
+						const submitBtn = document.getElementById('submit-Button');
+
+						form.addEventListener('submit', event => {
+							event.preventDefault();
+						
+							const newChampItem = document.createElement('li');
+							newChampItem.textContent = input.value;
+							champsList.appendChild(newChampItem);
+							form.reset();
+						});
+
+						input.addEventListener('input', () => {
+							if (options.includes(input.value)) {
+								submitBtn.disabled = false;
+							} else {
+								submitBtn.disabled = true;
+							}
+						});
+					</script>
+
 				<!-- Footer -->
 					<footer id="footer">
 						<div class="inner">

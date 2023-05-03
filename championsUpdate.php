@@ -19,11 +19,11 @@
     // foreach($regions as $region) {
     //     $sqlRegion = "INSERT INTO region (name, story)
     //                   VALUES ('{$region->regionName}','{$region->story}')";
-    //
+    
     //     if ($conn->query($sqlRegion) === TRUE) {
     //         echo "$region->regionName: $region->story<br>Entered correctly<br><br>";
     //     } else {
-    //         echo "Error: " . $sql . "<br>" . $conn->error;
+    //         echo "Error: " . $sqlRegion . "<br>" . $conn->error;
     //     }
     // }
 
@@ -53,6 +53,8 @@
     //     $id++;
     // }
 
-    //close the connection.
+    /**
+     * Lose the connection.
+     */ 
     mysqli_close($conn);
 ?>
