@@ -32,6 +32,13 @@
     }
 
     /**
+     * Query for admin users.
+     * 
+     * INSERT INTO `runeterradb`.`user` (`username`, `password`, `isAdmin`) VALUES ('mttia', 'mttia1234', '1');
+     * INSERT INTO `runeterradb`.`user` (`username`, `password`, `isAdmin`) VALUES ('paglia', 'paglia1234', '1');
+     */
+
+    /**
      * Query for gender.
      * 
      * INSERT INTO `runeterradb`.`gender` (`idGender`, `genderValue`) VALUES ('0', 'Male');

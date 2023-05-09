@@ -170,11 +170,12 @@ DROP TABLE IF EXISTS `mission`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mission` (
   `idMission` int NOT NULL AUTO_INCREMENT,
+  `rank` varchar(32) NOT NULL,
   `description` varchar(1000) NOT NULL,
   `goal` int NOT NULL,
   `points` int NOT NULL,
   PRIMARY KEY (`idMission`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='	';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='	';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,6 +184,7 @@ CREATE TABLE `mission` (
 
 LOCK TABLES `mission` WRITE;
 /*!40000 ALTER TABLE `mission` DISABLE KEYS */;
+INSERT INTO `mission` VALUES (0,'Iron','Guess a total of 10 champions.',10,14),(1,'Bronze','Guess a total of 25 champions.',25,35),(2,'Silver','Guess a total of 45 champions.',45,56),(3,'Gold','Guess a total of 70 champions.',70,98),(4,'Platinum','Guess a total of 100 champions.',100,140),(5,'Diamond','Guess a total of 135 champions.',135,189),(6,'Master','Guess a total of 175 champions.',175,245),(7,'GrandMaster','Guess a total of 220 champions.',220,308),(8,'Challenger','Guess a total of 270 champions.',270,378);
 /*!40000 ALTER TABLE `mission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -388,6 +390,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('mttia','mttia1234',1),('paglia','paglia1234',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -400,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-09 22:49:57
+-- Dump completed on 2023-05-10  0:07:37
