@@ -34,9 +34,9 @@
     /**
      * Query for gender.
      * 
-     * INSERT INTO `runeterradb`.`gender` (`idGender`, `genderValue`) VALUES ('0', 'male');
-     * INSERT INTO `runeterradb`.`gender` (`idGender`, `genderValue`) VALUES ('1', 'female');
-     * INSERT INTO `runeterradb`.`gender` (`idGender`, `genderValue`) VALUES ('2', 'other');
+     * INSERT INTO `runeterradb`.`gender` (`idGender`, `genderValue`) VALUES ('0', 'Male');
+     * INSERT INTO `runeterradb`.`gender` (`idGender`, `genderValue`) VALUES ('1', 'Female');
+     * INSERT INTO `runeterradb`.`gender` (`idGender`, `genderValue`) VALUES ('2', 'Other');
      */
 
     /**
