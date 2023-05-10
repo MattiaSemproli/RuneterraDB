@@ -16,14 +16,14 @@
      * Insert all the regions.
      */
     function upRegions($conn) {
-        $regions = json_decode(file_get_contents("..\json\regions.json"));
+        $regions = json_decode(file_get_contents("../json/regions.json"));
         $id = 0;
         foreach($regions as $region) {
-            $sqlRegion = "INSERT INTO region (idRegion, name, story)
-                          VALUES ($id,'{$region->regionName}','{$region->story}')";
+            $story = mysqli_real_escape_string($conn, $region->story);
+            $sqlRegion = "UPDATE region SET story = '{$story}' WHERE idRegion = $id";
         
             if ($conn->query($sqlRegion) === TRUE) {
-                echo "$id: $region->regionName: $region->story<br>Entered correctly<br><br>";
+                echo "$id: $region->regionName: $region->story<br>Updated correctly<br><br>";
             } else {
                 echo "Error: " . $sqlRegion . "<br>" . $conn->error;
             }
