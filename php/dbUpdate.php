@@ -5,14 +5,6 @@
     require_once 'connect.php';
 
     /**
-     * Open a connection.
-     */
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if (!$conn) {
-        die("Connessione al database fallita: " . mysqli_connect_error());
-    }
-
-    /**
      * Insert all the regions.
      */
     function upRegions($conn) {

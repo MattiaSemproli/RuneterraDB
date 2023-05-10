@@ -25,3 +25,21 @@ form {
 #champions-list li {
     margin-bottom: 10px;
 }
+
+#box {
+    margin-top: 7%;
+    margin-left: 7%;
+    margin-bottom: 7%;
+    width: 35%;
+    height: 70%;
+    border: 1px solid #bfbfbf;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px #bfbfbf;	
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto; /* Aggiunge la scrollbar quando il contenuto supera le dimensioni della box */
+}
+
+img:hover {
+    cursor: crosshair;
+}

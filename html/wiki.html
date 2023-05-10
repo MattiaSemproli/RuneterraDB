@@ -7,10 +7,11 @@
 <html>
 
 	<head>
-		<title>RuneterraDB | to set</title>
+		<title>RuneterraDB | Wiki</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="stylesheet" href="../assets/css/centerBox.css" />
 		<noscript>
 			<link rel="stylesheet" href="../assets/css/noscript.css" />
 		</noscript>
@@ -39,6 +40,46 @@
 				<a href="#" class="close">Close</a>
 			</div>
 		</nav>
+
+		<!-- Center -->
+		<div id="box">
+			<div id="champions-list">
+			</div>
+			<script>
+				const champsList = document.getElementById('champions-list');
+				window.addEventListener('load', function() {
+					var xhr = new XMLHttpRequest();
+					xhr.open('GET', '../php/getChampionWiki.php', true);
+					xhr.onload = function() {
+						if (xhr.status === 200) {
+							var data = JSON.parse(xhr.responseText);
+							loadData(data);
+						} else {
+							console.log('Errore nella richiesta: ' + xhr.status);
+						}
+					};
+					xhr.send();
+				});
+
+				function loadData(data) {
+					for (var i = 0; i < data.length; i++) {
+						var item = new Image();
+						var imageUrl = "../sources/ChampionsIcon/"+ data[i][0].replaceAll(' ','') +"_0.jpg";
+						item.src = imageUrl;
+						item.width = 75;
+						item.height = 75;
+						item.style.margin = "15px";
+						item.style.borderRadius = "15px";
+						item.onclick = (function(url) {
+							return function() {
+								window.open(url, "_blank");
+							}
+						})(imageUrl);
+						champsList.appendChild(item);
+					}
+				}
+			</script>
+		</div>
 
 		<!-- Footer -->
 		<footer id="footer">
