@@ -108,7 +108,36 @@ CREATE TABLE `complete` (
 
 LOCK TABLES `complete` WRITE;
 /*!40000 ALTER TABLE `complete` DISABLE KEYS */;
+INSERT INTO `complete` VALUES (0,'mttia',0),(0,'mttia',1),(0,'mttia',2),(0,'mttia',3),(0,'mttia',4),(0,'mttia',5),(0,'mttia',6),(0,'mttia',7),(0,'mttia',8),(0,'paglia',0),(0,'paglia',1),(0,'paglia',2),(0,'paglia',3),(0,'paglia',4),(0,'paglia',5),(0,'paglia',6),(0,'paglia',7),(0,'paglia',8);
 /*!40000 ALTER TABLE `complete` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `game`
+--
+
+DROP TABLE IF EXISTS `game`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `game` (
+  `idGame` int NOT NULL,
+  `numberOfTry` int NOT NULL,
+  `date` date NOT NULL,
+  `nameToGuess` varchar(32) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  PRIMARY KEY (`idGame`),
+  KEY `FK_game_summoner_idx` (`username`),
+  CONSTRAINT `FK_game_summoner` FOREIGN KEY (`username`) REFERENCES `summoner` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `game`
+--
+
+LOCK TABLES `game` WRITE;
+/*!40000 ALTER TABLE `game` DISABLE KEYS */;
+/*!40000 ALTER TABLE `game` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -186,6 +215,30 @@ LOCK TABLES `mission` WRITE;
 /*!40000 ALTER TABLE `mission` DISABLE KEYS */;
 INSERT INTO `mission` VALUES (0,'Iron','Guess a total of 10 champions.',10,14),(1,'Bronze','Guess a total of 25 champions.',25,35),(2,'Silver','Guess a total of 45 champions.',45,56),(3,'Gold','Guess a total of 70 champions.',70,98),(4,'Platinum','Guess a total of 100 champions.',100,140),(5,'Diamond','Guess a total of 135 champions.',135,189),(6,'Master','Guess a total of 175 champions.',175,245),(7,'GrandMaster','Guess a total of 220 champions.',220,308),(8,'Challenger','Guess a total of 270 champions.',270,378);
 /*!40000 ALTER TABLE `mission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rank`
+--
+
+DROP TABLE IF EXISTS `rank`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rank` (
+  `idRank` int NOT NULL,
+  `rankValue` varchar(32) NOT NULL,
+  PRIMARY KEY (`idRank`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rank`
+--
+
+LOCK TABLES `rank` WRITE;
+/*!40000 ALTER TABLE `rank` DISABLE KEYS */;
+INSERT INTO `rank` VALUES (0,'Iron'),(1,'Bronze'),(2,'Silver'),(3,'Gold'),(4,'Platinum'),(5,'Diamond'),(6,'Master'),(7,'GrandMaster'),(8,'Challenger');
+/*!40000 ALTER TABLE `rank` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -294,14 +347,14 @@ DROP TABLE IF EXISTS `stats`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `stats` (
   `idChampion` int NOT NULL,
-  `healthPoint` int NOT NULL,
-  `mana` int NOT NULL,
-  `attackDamage` int NOT NULL,
-  `abilityPower` int NOT NULL,
-  `armor` int NOT NULL,
-  `magicResistance` int NOT NULL,
-  `attackSpeed` int NOT NULL,
-  `movementSpeed` int NOT NULL,
+  `healthPoint` float NOT NULL,
+  `mana` float NOT NULL,
+  `attackDamage` float NOT NULL,
+  `attackRange` float NOT NULL,
+  `armor` float NOT NULL,
+  `magicResistance` float NOT NULL,
+  `attackSpeed` float NOT NULL,
+  `movementSpeed` float NOT NULL,
   PRIMARY KEY (`idChampion`),
   CONSTRAINT `FK_stats_champion` FOREIGN KEY (`idChampion`) REFERENCES `champion` (`idChampion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -313,6 +366,7 @@ CREATE TABLE `stats` (
 
 LOCK TABLES `stats` WRITE;
 /*!40000 ALTER TABLE `stats` DISABLE KEYS */;
+INSERT INTO `stats` VALUES (0,650,0,60,175,38,32,0.651,345),(1,590,418,53,550,21,30,0.668,330),(2,570,200,62,125,23,37,0.625,345),(3,630,350,52,500,26,30,0.638,330),(4,685,350,62,125,47,32,0.625,330),(5,685,285,53,125,30,32,0.736,335),(6,550,495,51,600,21,30,0.625,325),(7,560,418,50,625,19,30,0.579,335),(8,580,348,55,550,26,30,0.64,325),(9,640,280,59,600,26,30,0.658,325),(10,620,530,55,550,22,30,0.625,335),(11,550,320,52,525,22,30,0.625,335),(12,630,350,52,500,34,30,0.625,330),(13,610,60,60,175,32,32,0.85,340),(14,633,267,62,125,40,28,0.65,325),(15,590,469,57,550,22,30,0.625,340),(16,610,311,55,125,47,32,0.644,335),(17,580,315,60,650,27,30,0.681,325),(18,646,339,68,125,35,32,0.644,340),(19,630,350,53,550,18,32,0.647,328),(20,644,270,69,125,38,32,0.625,345),(21,588,350,55,550,28,30,0.638,325),(22,652,263,64,175,39,32,0.625,340),(23,640,375,57,150,31,32,0.625,345),(24,613,0,61,125,32,29,0.67,345),(25,675,361,62,550,29,30,0.679,330),(26,655,280,58,125,32,32,0.688,340),(27,650,324,55,550,30,30,0.625,330),(28,642,315,61,125,37,32,0.667,335),(29,600,375,62,550,24,30,0.625,325),(30,650,500,55,480,34,30,0.625,335),(31,620,300,68,150,33,32,0.69,345),(32,640,317,58,175,22,32,0.658,335),(33,632,500,59,150,24,32,0.625,335),(34,600,280,64,125,31,32,0.658,345),(35,690,0,69,175,38,32,0.625,340),(36,540,100,57,175,32,30,0.625,335),(37,670,400,64,125,38,32,0.675,330),(38,625,325,68,425,33,32,0.475,340),(39,620,330,63,150,39,32,0.69,340),(40,625,277,66,175,32,32,0.67,345),(41,558,385,56,550,19,30,0.625,340),(42,656,300,68,125,35,32,0.625,350),(43,590,350,65,200,36,30,0.656,335),(44,655,450,50,475,27,32,0.644,330),(45,570,350,52,500,28,30,0.625,325),(46,640,300,64,175,36,32,0.658,340),(47,665,339,68,125,36,32,0.638,350),(48,590,375,57,125,22,30,0.658,335),(49,655,300,59,550,24,30,0.625,330),(50,630,260,59,525,26,30,0.625,325),(51,610,290,64,175,33,30,0.625,330),(52,670,345,59,525,28,30,0.644,335),(53,574,300,66,525,24,30,0.694,330),(54,604,374,51,525,28,30,0.625,335),(55,620,467,46,450,21,30,0.625,335),(56,646,400,59,150,19,30,0.64,335),(57,672,0,58,125,28,32,0.658,335),(58,670,330,50,175,26,22,0.625,335),(59,655,410,68,175,38,32,0.669,340),(60,611,200,48,550,29,30,0.625,335),(61,643,327,63,125,36,32,0.668,350),(62,610,300,65,500,29,30,0.625,325),(63,410,100,65,125,35,28,0.625,345),(64,635,325,61,500,24,30,0.665,330),(65,598,400,55,525,22,30,0.625,340),(66,645,200,66,125,34,32,0.651,345),(67,646,302,60,125,47,32,0.625,335),(68,605,410,61,325,22,32,0.625,330),(69,620,475,55,550,22,30,0.656,325),(70,641,320,60,500,28,30,0.638,335),(71,595,350,47,550,29,30,0.625,330),(72,560,480,54,550,19,30,0.669,330),(73,644,280,62,125,37,28,0.736,335),(74,580,375,55,500,18,30,0.625,335),(75,635,375,64,125,39,32,0.8,335),(76,669,251,65,175,33,32,0.679,355),(77,560,365,48,525,28,30,0.625,330),(78,640,300,52,550,28,30,0.656,325),(79,645,100,61,175,37,32,0.625,335),(80,630,340,56,450,25,30,0.625,335),(81,560,365,51,550,29,30,0.644,335),(82,631,326,67,125,34,32,0.638,350),(83,646,400,61,175,39,32,0.706,325),(84,610,450,48,550,21,30,0.625,340),(85,610,295,58,525,32,30,0.638,335),(86,570,350,58,225,27,32,0.697,340),(87,655,275,62,125,38,32,0.721,345),(88,610,280,61,125,29,32,0.625,345),(89,645,316,68,125,35,32,0.694,350),(90,600,418,40,525,20,26,0.658,325),(91,660,341,69,175,33,32,0.625,335),(92,650,317,64,175,40,28,0.658,345),(93,610,280,64,125,38,32,0.625,345),(94,670,415,62,150,45,32,0.667,330),(95,590,320,66,150,28,32,0.688,335),(96,603,269,59,525,28,30,0.668,335),(97,610,315,62,300,30,32,0.635,335),(98,675,310,55,125,40,32,0.656,335),(99,640,100,61,175,36,32,0.667,335),(100,610,350,55,175,32,32,0.55,335),(101,545,350,49,550,27,30,0.625,330),(102,660,100,69,125,35,32,0.665,345),(103,620,4,68,125,34,32,0.667,345),(104,630,0,64,125,33,32,0.625,340),(105,659,100,61,125,36,28,0.644,345),(106,645,300,58,550,22,32,0.625,340),(107,600,349,57,500,26,30,0.658,335),(108,630,400,66,150,34,32,0.688,340),(109,530,350,50,600,28,30,0.625,330),(110,570,440,55,525,19,30,0.669,325),(111,670,0,60,125,33,28,0.625,340),(112,630,297,63,125,30,32,0.694,345),(113,610,400,60,125,34,32,0.751,340),(114,665,100,66,125,38,32,0.658,350),(115,650,330,63,125,34,32,0.613,345),(116,655,400,68,175,32,32,0.679,345),(117,600,340,58,500,26,30,0.625,335),(118,650,320,65,125,38,32,0.625,335),(119,550,340,49,550,26,30,0.644,325),(120,605,425,50,550,32,30,0.625,325),(121,595,468,58,525,26,30,0.625,330),(122,575,310,61,175,27,32,0.645,340),(123,563,480,54,550,25,30,0.625,330),(124,640,325,56,175,42,32,0.658,335),(125,550,470,58,525,18,30,0.625,330),(126,658,400,68,125,30,39,0.625,335),(127,645,300,55,150,40,28,0.625,340),(128,598,334,54,500,24,30,0.69,330),(129,600,274,56,450,28,30,0.625,330),(130,670,250,59,525,26,30,0.656,325),(131,686,340,68,175,37,32,0.67,350),(132,696,100,72,125,33,32,0.67,345),(133,604,333,52,525,21,30,0.651,330),(134,682,300,59,550,27,30,0.679,330),(135,664,271,62,125,31,32,0.65,350),(136,655,340,63,350,36,32,0.625,330),(137,600,360,62,575,27,30,0.658,330),(138,550,232,60,550,23,30,0.658,330),(139,550,490,52,550,18,32,0.625,340),(140,590,469,55,525,22,30,0.625,340),(141,590,490,54,550,23,28,0.669,335),(142,655,295,63,125,30,32,0.644,340),(143,630,10000,57,200,34,32,0.658,345),(144,600,405,53,525,23,30,0.658,335),(145,607,2,55,450,27,30,0.658,330),(146,650,350,60,150,31,32,0.625,340),(147,620,280,65,125,33,32,0.638,335),(148,610,300,66,175,31,28,0.69,340),(149,660,340,60,525,25,30,0.658,330),(150,596,459,55,525,22,30,0.625,340),(151,640,274,63,175,35,32,0.645,345),(152,590,100,60,175,30,32,0.697,345),(153,620,500,60,175,28,32,0.625,345),(154,650,300,62,175,39,32,0.625,340),(155,500,440,49,425,25,25,0.625,330),(156,685,0,60,175,33,32,0.736,340),(157,654,200,63,125,32,29,0.651,345),(158,630,250,53,500,24,30,0.658,330),(159,606,480,54,550,22,30,0.656,325),(160,574,452,52,550,24,30,0.625,335),(161,630,425,58,550,21,30,0.625,340),(162,574,418,53,575,29,30,0.625,340);
 /*!40000 ALTER TABLE `stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,13 +380,15 @@ DROP TABLE IF EXISTS `summoner`;
 CREATE TABLE `summoner` (
   `username` varchar(32) NOT NULL,
   `summonerName` varchar(32) NOT NULL,
-  `score` int NOT NULL,
-  `championsGuessed` int NOT NULL,
-  `imagesGuessed` int NOT NULL,
-  `nameTeam` varchar(32) NOT NULL,
+  `score` int DEFAULT '0',
+  `championsGuessed` int DEFAULT '0',
+  `team` int NOT NULL,
+  `rank` int DEFAULT '0',
   PRIMARY KEY (`username`),
-  KEY `FK_summoner_team_idx` (`nameTeam`),
-  CONSTRAINT `FK_summoner_team` FOREIGN KEY (`nameTeam`) REFERENCES `team` (`nameTeam`),
+  KEY `FK_summoner_rank_idx` (`rank`),
+  KEY `FK_summoner_team_idx` (`team`),
+  CONSTRAINT `FK_summoner_rank` FOREIGN KEY (`rank`) REFERENCES `rank` (`idRank`),
+  CONSTRAINT `FK_summoner_team` FOREIGN KEY (`team`) REFERENCES `team` (`idTeam`),
   CONSTRAINT `FK_summoner_user` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -343,6 +399,7 @@ CREATE TABLE `summoner` (
 
 LOCK TABLES `summoner` WRITE;
 /*!40000 ALTER TABLE `summoner` DISABLE KEYS */;
+INSERT INTO `summoner` VALUES ('mttia','m ttia',0,0,0,0),('paglia','ThePaglia02',0,0,0,0);
 /*!40000 ALTER TABLE `summoner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,9 +411,11 @@ DROP TABLE IF EXISTS `team`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `team` (
+  `idTeam` int NOT NULL,
   `nameTeam` varchar(32) NOT NULL,
-  `scoreTeam` int NOT NULL,
-  PRIMARY KEY (`nameTeam`)
+  `shortTeam` varchar(32) NOT NULL,
+  `scoreTeam` int DEFAULT '0',
+  PRIMARY KEY (`idTeam`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -366,6 +425,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
+INSERT INTO `team` VALUES (0,'SK Telecom T1','T1',0),(1,'Clown 9','C9',0),(2,'G2 Esports','G2',0),(3,'Edward Gaming','EDG',0);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,4 +463,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-10  0:07:37
+-- Dump completed on 2023-05-10 11:04:57
