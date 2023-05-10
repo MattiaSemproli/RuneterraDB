@@ -68,9 +68,17 @@
      * INSERT INTO `runeterradb`.`resource` (`idResource`, `resourceValue`) VALUES ('6', 'Heat');
      * INSERT INTO `runeterradb`.`resource` (`idResource`, `resourceValue`) VALUES ('7', 'Health costs');
      * INSERT INTO `runeterradb`.`resource` (`idResource`, `resourceValue`) VALUES ('8', 'Flow');
-
      */
     
+    /**
+     * Query for fullfill complete relationship table between summoner and mission.
+     * 
+     * INSERT INTO runeterradb.complete (isComplete, username, idMission)
+     * SELECT 0, runeterradb.summoner.username, runeterradb.mission.idMission
+     * FROM runeterradb.summoner
+     * CROSS JOIN mission;
+     */
+
     /**
      * Insert all the species.
      * 
