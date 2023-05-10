@@ -17,7 +17,7 @@
 		</noscript>
 	</head>
 
-	<body class="is-preload">
+	<body style="display:flex">
 
 		<!-- Header -->
 		<header id="header" class="alt">
@@ -41,8 +41,8 @@
 			</div>
 		</nav>
 
-		<!-- Center -->
-		<div id="box">
+		<!-- Center left -->
+		<div id="leftBox">
 			<div id="championsBox">
 			</div>
 			<script>
@@ -63,71 +63,200 @@
 
 				function load(data) {
 					for (var i = 0; i < data.length; i++) {
-						var box = document.createElement("div");
+						(function(){
+							var singleData = data[i];
+							var box = document.createElement("div");
 
-						var item = new Image();
-						var imageUrl = "../sources/ChampionsIcon/"+ data[i][0].replaceAll(' ','') +"_0.jpg";
-						item.src = imageUrl;
-						item.width = 75;
-						item.height = 75;
-						item.style.margin = "15px";
-						item.style.borderRadius = "15px";
-						
-						var name = document.createElement("div");
-						name.textContent = data[i][0];
-						name.style.fontSize = "15px";
-						name.style.opacity = "0";
-						name.classList.add("championsName");
+							var item = new Image();
+							var imageUrl = "../sources/ChampionsIcon/"+ singleData[0].replaceAll(' ','') +"_0.jpg";
+							item.src = imageUrl;
+							item.width = 75;
+							item.height = 75;
+							item.style.margin = "15px";
+							item.style.borderRadius = "15px";
 
-						item.onclick = (function(url) {
-							return function() {
-								window.open(url, "_blank");
-							}
-						})(imageUrl);
-					
-						item.onmouseover = function() {
-							this.style.opacity = ".4";
-							name.style.opacity = "1";
-						};
-						item.onmouseout = function() {
-							this.style.opacity = "1";
+							var name = document.createElement("div");
+							name.textContent = singleData[0];
+							name.style.fontSize = "15px";
+							name.style.fontWeight = "";
 							name.style.opacity = "0";
-						};
+							name.classList.add("championsName");
 
-						box.appendChild(name);
-						box.appendChild(item);
+							item.onclick = function() {
+								icon();
+								name();
+								data();
+								getChampionStats();
+								getChampionLore();
 
-						champsList.appendChild(box);
-					}
-				}
+								function icon() {
+									var iconBox = document.getElementById("championsIcon");
+									var champIcon = new Image();
+									champIcon.src = imageUrl;
+									champIcon.style.objectFit = "cover";
+									champIcon.style.width = "100%";
+									champIcon.style.height = "100%";
+									champIcon.style.borderRadius = "15px";
+									iconBox.style.padding = "15px";
+									removeAllChildNodes(iconBox);
+									iconBox.appendChild(champIcon);
+								}
+								
+								function name() {
+									var nameBox = document.getElementById("championsName");
+									var champName = document.createElement("div");
+									var champGender = document.createElement("div");
+									champName.textContent = singleData[0];
+									champGender.textContent = singleData[1];
+									nameBox.style.padding = "15px";
+									removeAllChildNodes(nameBox);
+									nameBox.appendChild(champName);
+									nameBox.appendChild(champGender);
+								}
 
-				function loadData(data) {
-					for (var i = 0; i < data.length; i++) {
-						var item = new Image();
-						var imageUrl = "../sources/ChampionsIcon/"+ data[i][0].replaceAll(' ','') +"_0.jpg";
-						item.src = imageUrl;
-						item.width = 75;
-						item.height = 75;
-						item.style.margin = "15px";
-						item.style.borderRadius = "15px";
-						item.onclick = (function(url) {
-							return function() {
-								window.open(url, "_blank");
+								function data() {
+									var dataBox = document.getElementById("championsData");
+									var champRole = document.createElement("div");
+									var champSpecies = document.createElement("div");
+									var champResource = document.createElement("div"); 
+									var champAttacker = document.createElement("div"); 
+									var champRegion = document.createElement("div");
+									champRole.textContent = singleData[2];
+									champSpecies.textContent = singleData[3];
+									champResource.textContent = singleData[4];
+									champAttacker.textContent = singleData[5];
+									champRegion.textContent = singleData[6];
+									dataBox.style.padding = "15px";
+									removeAllChildNodes(dataBox);
+									dataBox.appendChild(champRole);
+									dataBox.appendChild(champSpecies);
+									dataBox.appendChild(champResource);
+									dataBox.appendChild(champAttacker);
+									dataBox.appendChild(champRegion);
+								}
+
+								function attributes(stats) {
+									var attributesBox = document.getElementById("championsAttributes");
+									var champHP = document.createElement("div");
+									var champMana = document.createElement("div");
+									var champAD = document.createElement("div");
+									var champAttackRange = document.createElement("div");
+									var champArmor = document.createElement("div");
+									var champMR = document.createElement("div");
+									var champAttackSpeed = document.createElement("div");
+									var champMS = document.createElement("div");
+									champHP.textContent = "HP: " + stats["healthPoint"];
+									champMana.textContent = "Mana: " + stats["mana"];
+									champAD.textContent = "AD: " + stats["attackDamage"];
+									champAttackRange.textContent = "Attack Range: " + stats["attackRange"];
+									champArmor.textContent = "Armor: " + stats["armor"];
+									champMR.textContent = "MR: " + stats["magicResistance"];
+									champAttackSpeed.textContent = "Attack Speed: " + stats["attackSpeed"];
+									champMS.textContent = "Movement Speed: " + stats["movementSpeed"];
+									attributesBox.style.padding = "15px";
+									removeAllChildNodes(attributesBox);
+									attributesBox.appendChild(champHP);
+									attributesBox.appendChild(champMana);
+									attributesBox.appendChild(champAD);
+									attributesBox.appendChild(champAttackRange);
+									attributesBox.appendChild(champArmor);
+									attributesBox.appendChild(champMR);
+									attributesBox.appendChild(champAttackSpeed);
+									attributesBox.appendChild(champMS);
+								}
+
+								function nickname(nick) {
+									var nicknameBox = document.getElementById("championsNickname");
+									var champNickname = document.createElement("div");
+									champNickname.textContent = nick;
+									nicknameBox.style.padding = "15px";
+									removeAllChildNodes(nicknameBox);
+									nicknameBox.appendChild(champNickname);
+								}
+
+								function lore(bio) {
+									var loreBox = document.getElementById("championsLore");
+									var champLore = document.createElement("div");
+									champLore.textContent = bio;
+									loreBox.style.padding = "15px";
+									removeAllChildNodes(loreBox);
+									loreBox.appendChild(champLore);
+								}
+
+								function getChampionStats() {
+									var xhr = new XMLHttpRequest();
+									xhr.open("GET", "../php/getChampionStats.php?champion=" + singleData[0], true);
+									xhr.onload = function() {
+										if (xhr.status === 200) {
+											var stats = JSON.parse(xhr.responseText);	
+											attributes(stats);								
+										} else {
+											console.log('Errore nella richiesta: ' + xhr.status);
+										}
+									};
+									xhr.send();
+								}
+
+								function getChampionLore() {
+									var xhr = new XMLHttpRequest();
+									xhr.open("GET", "../php/getChampionLore.php?champion=" + singleData[0], true);
+									xhr.onload = function() {
+										if (xhr.status === 200) {
+											var lor = JSON.parse(xhr.responseText);	
+											nickname(lor['nickname']);
+											lore(lor['bio']);										
+										} else {
+											console.log('Errore nella richiesta: ' + xhr.status);
+										}
+									};
+									xhr.send();
+								}
+
+								function removeAllChildNodes(parent) {
+									while (parent.hasChildNodes()) {
+										parent.removeChild(parent.childNodes[0]);
+									}
+								}
 							}
-						})(imageUrl);
-						item.setAttribute("title", data[i][0]);
-						item.onmouseover = function() {
-							this.style.opacity = "0.4";
+						
+							item.onmouseover = function() {
+								this.style.opacity = ".4";
+								name.style.opacity = "1";
+							};
+							item.onmouseout = function() {
+								this.style.opacity = "1";
+								name.style.opacity = "0";
+							};
 
-						};
-						item.onmouseout = function() {
-							this.style.opacity = "1.0";
-						};
-						champsList.appendChild(item);
+							box.appendChild(name);
+							box.appendChild(item);
+
+							champsList.appendChild(box);
+						})();
 					}
 				}
 			</script>
 		</div>
+
+		<!-- Center right -->
+		<div id="rightBox">
+			<div id="championsInfo">
+				<div id="championsProfile">
+					<div id="championsIcon"></div>
+					<div id="championsName"></div>
+				</div>
+				<div id="championsBio">
+					<div id="championsData"></div>
+					<div id="championsAttributes"></div>
+				</div>
+			</div>
+			<div id="championsStats">
+				<div id="championsNickname"></div>
+				<div id="championsLore"></div>
+			</div>
+		</div>
+		
+		
 
 		<!-- Footer -->
 		<footer id="footer">
