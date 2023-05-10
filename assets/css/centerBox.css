@@ -20,6 +20,7 @@ form {
     list-style-type: none;
     padding: 0;
     text-align: center;
+    position: relative;
 }
 
 #champions-list li {
@@ -37,9 +38,24 @@ form {
     box-shadow: 0px 0px 20px #bfbfbf;	
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
-    overflow: auto; /* Aggiunge la scrollbar quando il contenuto supera le dimensioni della box */
+    overflow: auto;
 }
 
-img:hover {
-    cursor: crosshair;
+#box::-webkit-scrollbar {
+    width: 0;
+}
+
+img:hover{
+    cursor: pointer;
+}
+
+#championsBox {
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.championsName {
+    position: absolute;
 }

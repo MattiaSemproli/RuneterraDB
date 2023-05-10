@@ -43,23 +43,63 @@
 
 		<!-- Center -->
 		<div id="box">
-			<div id="champions-list">
+			<div id="championsBox">
 			</div>
 			<script>
-				const champsList = document.getElementById('champions-list');
+				const champsList = document.getElementById('championsBox');
 				window.addEventListener('load', function() {
 					var xhr = new XMLHttpRequest();
 					xhr.open('GET', '../php/getChampionWiki.php', true);
 					xhr.onload = function() {
 						if (xhr.status === 200) {
 							var data = JSON.parse(xhr.responseText);
-							loadData(data);
+							load(data);
 						} else {
 							console.log('Errore nella richiesta: ' + xhr.status);
 						}
 					};
 					xhr.send();
 				});
+
+				function load(data) {
+					for (var i = 0; i < data.length; i++) {
+						var box = document.createElement("div");
+
+						var item = new Image();
+						var imageUrl = "../sources/ChampionsIcon/"+ data[i][0].replaceAll(' ','') +"_0.jpg";
+						item.src = imageUrl;
+						item.width = 75;
+						item.height = 75;
+						item.style.margin = "15px";
+						item.style.borderRadius = "15px";
+						
+						var name = document.createElement("div");
+						name.textContent = data[i][0];
+						name.style.fontSize = "15px";
+						name.style.opacity = "0";
+						name.classList.add("championsName");
+
+						item.onclick = (function(url) {
+							return function() {
+								window.open(url, "_blank");
+							}
+						})(imageUrl);
+					
+						item.onmouseover = function() {
+							this.style.opacity = ".4";
+							name.style.opacity = "1";
+						};
+						item.onmouseout = function() {
+							this.style.opacity = "1";
+							name.style.opacity = "0";
+						};
+
+						box.appendChild(name);
+						box.appendChild(item);
+
+						champsList.appendChild(box);
+					}
+				}
 
 				function loadData(data) {
 					for (var i = 0; i < data.length; i++) {
@@ -75,6 +115,14 @@
 								window.open(url, "_blank");
 							}
 						})(imageUrl);
+						item.setAttribute("title", data[i][0]);
+						item.onmouseover = function() {
+							this.style.opacity = "0.4";
+
+						};
+						item.onmouseout = function() {
+							this.style.opacity = "1.0";
+						};
 						champsList.appendChild(item);
 					}
 				}
