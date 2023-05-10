@@ -223,6 +223,35 @@
         }
     }
 
+    function upStats($conn) {
+        $champions = json_decode(file_get_contents("..\json\cs.json"));
+        $champions = $champions->data;
+        foreach($champions as $champion) {
+            $name = str_contains($champion->name, "'") ? str_replace("'", " ", $champion->name) : $champion->name;
+            $sqlStats = "INSERT INTO stats (idChampion, healthPoint, mana, attackDamage, attackRange, armor, magicResistance, attackSpeed, movementSpeed)
+                            VALUES (
+                                (SELECT idChampion FROM champion WHERE name = '$name'),
+                                {$champion->stats->hp},
+                                {$champion->stats->mp},
+                                {$champion->stats->attackdamage},
+                                {$champion->stats->attackrange},
+                                {$champion->stats->armor},
+                                {$champion->stats->spellblock},
+                                {$champion->stats->attackspeed},
+                                {$champion->stats->movespeed}
+                            )";
+            
+            if ($conn->query($sqlStats) === TRUE) {
+                echo "$name: {$champion->stats->hp}, {$champion->stats->mp}, 
+                        {$champion->stats->attackdamage}, {$champion->stats->attackrange}, 
+                        {$champion->stats->armor}, {$champion->stats->spellblock},
+                        {$champion->stats->attackspeed}, {$champion->stats->movespeed}<br>Entered correctly<br><br>";
+            } else {
+                echo "Error: " . $sqlStats . "<br>" . $conn->error;
+            }
+        }
+    }
+
     /**
      * Close the connection.
      */ 
