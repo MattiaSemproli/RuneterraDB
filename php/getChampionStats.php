@@ -1,7 +1,7 @@
 <?php
     /**
      * Require the file with connection variables.
-     */ 
+     */
     require_once 'connect.php';
 
     $champion = $_GET['champion'];

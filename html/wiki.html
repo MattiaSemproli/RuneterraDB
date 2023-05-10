@@ -189,7 +189,7 @@
 									xhr.onload = function() {
 										if (xhr.status === 200) {
 											var stats = JSON.parse(xhr.responseText);	
-											attributes(stats);								
+											attributes(stats);
 										} else {
 											console.log('Errore nella richiesta: ' + xhr.status);
 										}

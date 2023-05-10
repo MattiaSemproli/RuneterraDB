@@ -95,12 +95,12 @@ form {
     width: 70%;
     border: 1px solid green;
     display: flex;
-    overflow: auto;
 }
 
 #championsData {
     width: 50%;
     border: 1px solid brown;
+    overflow: auto;
 }
 
 #championsAttributes {
