@@ -66,22 +66,16 @@
 						(function(){
 							var singleData = data[i];
 							var box = document.createElement("div");
-
+							var name = document.createElement("div");
 							var item = new Image();
 							var imageUrl = "../sources/ChampionsIcon/"+ singleData[0].replaceAll(' ','') +"_0.jpg";
-							item.src = imageUrl;
-							item.width = 75;
-							item.height = 75;
-							item.style.margin = "15px";
-							item.style.borderRadius = "15px";
 
-							var name = document.createElement("div");
 							name.textContent = singleData[0];
-							name.style.fontSize = "15px";
-							name.style.fontWeight = "";
-							name.style.opacity = "0";
 							name.classList.add("championsName");
 
+							item.classList.add("Icon");
+							item.src = imageUrl;
+							
 							item.onclick = function() {
 								icon();
 								name();
@@ -92,100 +86,67 @@
 								function icon() {
 									var iconBox = document.getElementById("championsIcon");
 									var champIcon = new Image();
+									iconBox.classList.add("subBox");
+									champIcon.classList.add("cIcon");
 									champIcon.src = imageUrl;
-									champIcon.style.objectFit = "cover";
-									champIcon.style.width = "100%";
-									champIcon.style.height = "100%";
-									champIcon.style.borderRadius = "15px";
-									iconBox.style.padding = "15px";
 									removeAllChildNodes(iconBox);
 									iconBox.appendChild(champIcon);
 								}
 								
 								function name() {
 									var nameBox = document.getElementById("championsName");
-									var champName = document.createElement("div");
-									var champGender = document.createElement("div");
-									champName.textContent = singleData[0];
-									champGender.textContent = singleData[1];
-									nameBox.style.padding = "15px";
+									nameBox.classList.add("subBox");
 									removeAllChildNodes(nameBox);
-									nameBox.appendChild(champName);
-									nameBox.appendChild(champGender);
+									for (var i = 0; i < 2; i++) {
+										var champName = document.createElement("div");
+										champName.textContent = singleData[i];
+										nameBox.appendChild(champName);
+									}
 								}
 
 								function data() {
 									var dataBox = document.getElementById("championsData");
-									var champRole = document.createElement("div");
-									var champSpecies = document.createElement("div");
-									var champResource = document.createElement("div"); 
-									var champAttacker = document.createElement("div"); 
-									var champRegion = document.createElement("div");
-									champRole.textContent = singleData[2];
-									champSpecies.textContent = singleData[3];
-									champResource.textContent = singleData[4];
-									champAttacker.textContent = singleData[5];
-									champRegion.textContent = singleData[6];
-									dataBox.style.padding = "15px";
+									dataBox.classList.add("subBox");
 									removeAllChildNodes(dataBox);
-									dataBox.appendChild(champRole);
-									dataBox.appendChild(champSpecies);
-									dataBox.appendChild(champResource);
-									dataBox.appendChild(champAttacker);
-									dataBox.appendChild(champRegion);
+									for (var i = 2; i < singleData.length; i++) {
+										var champData = document.createElement("div");
+										champData.textContent = singleData[i];
+										dataBox.appendChild(champData);
+									}
 								}
 
 								function attributes(stats) {
 									var attributesBox = document.getElementById("championsAttributes");
-									var champHP = document.createElement("div");
-									var champMana = document.createElement("div");
-									var champAD = document.createElement("div");
-									var champAttackRange = document.createElement("div");
-									var champArmor = document.createElement("div");
-									var champMR = document.createElement("div");
-									var champAttackSpeed = document.createElement("div");
-									var champMS = document.createElement("div");
-									champHP.textContent = "HP: " + stats["healthPoint"];
-									champMana.textContent = "Mana: " + stats["mana"];
-									champAD.textContent = "AD: " + stats["attackDamage"];
-									champAttackRange.textContent = "Attack Range: " + stats["attackRange"];
-									champArmor.textContent = "Armor: " + stats["armor"];
-									champMR.textContent = "MR: " + stats["magicResistance"];
-									champAttackSpeed.textContent = "Attack Speed: " + stats["attackSpeed"];
-									champMS.textContent = "Movement Speed: " + stats["movementSpeed"];
-									attributesBox.style.padding = "15px";
+									attributesBox.classList.add("subBox");
 									removeAllChildNodes(attributesBox);
-									attributesBox.appendChild(champHP);
-									attributesBox.appendChild(champMana);
-									attributesBox.appendChild(champAD);
-									attributesBox.appendChild(champAttackRange);
-									attributesBox.appendChild(champArmor);
-									attributesBox.appendChild(champMR);
-									attributesBox.appendChild(champAttackSpeed);
-									attributesBox.appendChild(champMS);
+									Object.keys(stats).forEach(key => {
+										var champAttribute = document.createElement("div");
+										champAttribute.textContent = key + ": " + stats[key];
+										attributesBox.appendChild(champAttribute);
+									});
 								}
 
 								function nickname(nick) {
 									var nicknameBox = document.getElementById("championsNickname");
+									nicknameBox.classList.add("subBox");
 									var champNickname = document.createElement("div");
 									champNickname.textContent = nick;
-									nicknameBox.style.padding = "15px";
 									removeAllChildNodes(nicknameBox);
 									nicknameBox.appendChild(champNickname);
 								}
 
 								function lore(bio) {
 									var loreBox = document.getElementById("championsLore");
+									loreBox.classList.add("subBox");
 									var champLore = document.createElement("div");
 									champLore.textContent = bio;
-									loreBox.style.padding = "15px";
 									removeAllChildNodes(loreBox);
 									loreBox.appendChild(champLore);
 								}
 
 								function getChampionStats() {
 									var xhr = new XMLHttpRequest();
-									xhr.open("GET", "../php/getChampionStats.php?champion=" + singleData[0], true);
+									xhr.open("GET", "../php/getChampionStats.php?champion=" + encodeURIComponent(singleData[0]), true);
 									xhr.onload = function() {
 										if (xhr.status === 200) {
 											var stats = JSON.parse(xhr.responseText);	
@@ -199,7 +160,7 @@
 
 								function getChampionLore() {
 									var xhr = new XMLHttpRequest();
-									xhr.open("GET", "../php/getChampionLore.php?champion=" + singleData[0], true);
+									xhr.open("GET", "../php/getChampionLore.php?champion=" + encodeURIComponent(singleData[0]), true);
 									xhr.onload = function() {
 										if (xhr.status === 200) {
 											var lor = JSON.parse(xhr.responseText);	
