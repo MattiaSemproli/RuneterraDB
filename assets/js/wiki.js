@@ -13,6 +13,7 @@ window.addEventListener('load', function() {
 	};
 	xhr.send();
 });
+
 function load(data) {
 	for (var i = 0; i < data.length; i++) {
 		(function(){
@@ -21,8 +22,9 @@ function load(data) {
 			var name = document.createElement("div");
 			var item = new Image();
 			var imageUrl = "../sources/ChampionsIcon/"+ singleData[0].replaceAll(' ','') +"_0.jpg";
-			name.textContent = singleData[0];
+
 			name.classList.add("championsName");
+			name.textContent = singleData[0];
 			item.classList.add("Icon");
 			item.src = imageUrl;
 			
@@ -32,6 +34,7 @@ function load(data) {
 				data();
 				getChampionStats();
 				getChampionLore();
+
 				function icon() {
 					var iconBox = document.getElementById("championsIcon");
 					var champIcon = new Image();
@@ -52,6 +55,7 @@ function load(data) {
 						nameBox.appendChild(champName);
 					}
 				}
+
 				function data() {
 					var dataBox = document.getElementById("championsData");
 					dataBox.classList.add("subBox");
@@ -62,6 +66,7 @@ function load(data) {
 						dataBox.appendChild(champData);
 					}
 				}
+
 				function attributes(stats) {
 					var attributesBox = document.getElementById("championsAttributes");
 					attributesBox.classList.add("subBox");
@@ -72,6 +77,7 @@ function load(data) {
 						attributesBox.appendChild(champAttribute);
 					});
 				}
+
 				function nickname(nick) {
 					var nicknameBox = document.getElementById("championsNickname");
 					nicknameBox.classList.add("subBox");
@@ -80,6 +86,7 @@ function load(data) {
 					removeAllChildNodes(nicknameBox);
 					nicknameBox.appendChild(champNickname);
 				}
+
 				function lore(bio) {
 					var loreBox = document.getElementById("championsLore");
 					loreBox.classList.add("subBox");
@@ -88,6 +95,7 @@ function load(data) {
 					removeAllChildNodes(loreBox);
 					loreBox.appendChild(champLore);
 				}
+
 				function getChampionStats() {
 					var xhr = new XMLHttpRequest();
 					xhr.open("GET", "../php/getChampionStats.php?champion=" + encodeURIComponent(singleData[0]), true);
@@ -101,6 +109,7 @@ function load(data) {
 					};
 					xhr.send();
 				}
+
 				function getChampionLore() {
 					var xhr = new XMLHttpRequest();
 					xhr.open("GET", "../php/getChampionLore.php?champion=" + encodeURIComponent(singleData[0]), true);
@@ -115,6 +124,7 @@ function load(data) {
 					};
 					xhr.send();
 				}
+
 				function removeAllChildNodes(parent) {
 					while (parent.hasChildNodes()) {
 						parent.removeChild(parent.childNodes[0]);
@@ -123,15 +133,22 @@ function load(data) {
 			}
 		
 			item.onmouseover = function() {
+				this.classList.add("iconHover");
 				this.style.opacity = ".4";
+				name.classList.add("nameHover");
 				name.style.opacity = "1";
 			};
+
 			item.onmouseout = function() {
+				this.classList.remove("iconHover");
 				this.style.opacity = "1";
+				name.classList.remove("nameHover");
 				name.style.opacity = "0";
 			};
+
 			box.appendChild(name);
 			box.appendChild(item);
+			
 			champsList.appendChild(box);
 		})();
 	}

@@ -74,11 +74,13 @@ form {
 #championsProfile {
     width: 30%;
     border: 1px solid red;
+    border-top-left-radius: 15px;
 }
 
 #championsIcon {
     height: 60%;
     border: 1px solid orange;
+    border-top-left-radius: 15px;
 }
 
 #championsName {
@@ -89,13 +91,14 @@ form {
 
 #championsBio {
     width: 70%;
-    border: 1px solid green;
+    border: 1px solid brown;
     display: flex;
+    border-top-right-radius: 15px;
 }
 
 #championsData {
     width: 50%;
-    border: 1px solid brown;
+    border: 1px solid greenyellow;
     overflow: auto;
 }
 
@@ -103,11 +106,14 @@ form {
     width: 50%;
     border: 1px solid fuchsia;
     overflow: auto;
+    border-top-right-radius: 15px;
 }
 
 #championsStats {
     height: 50%;
     border: 1px solid blue;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 #championsNickname {
@@ -120,6 +126,8 @@ form {
     height: 80%;
     border: 1px solid white;
     overflow: auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .subBox {
@@ -140,9 +148,20 @@ form {
     margin: 15px;
 }
 
+.Icon.iconHover {
+    opacity: .5;
+    transform: scale(1.6);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
 .championsName {
     position: absolute;
     font-size: 15px;
     font-weight: bold;
     opacity: 0;
+}
+
+.championsName.nameHover {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
 }
