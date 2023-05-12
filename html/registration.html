@@ -18,7 +18,6 @@
 
 		<!-- Header -->
 		<header id="header" class="alt">
-			<h1><a href="index.html">RuneterraDB</a></h1>
 			<nav>
 				<a href="#menu">Menu</a>
 			</nav>
@@ -41,14 +40,13 @@
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
-				<form action="index.html" method="POST">
-					<label for="username">Username:</label>
+				<form action="../php/registration.php" method="POST">
+					<label for="username" id="usernameLabel">Username:</label>
 					<input type="text" id="username" name="username" placeholder="Insert username..." required>
 
 					<label for="password">Password:</label>
 					<input type="password" id="password" name="password" placeholder="Insert password..." required>
 
-					
 					<label for="confirmPassword">Confirm password:</label>
 					<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password..." required>
 
@@ -56,25 +54,7 @@
 				</form>
 			</div>
 		</section>
-		<script>
-			const pssw = document.getElementById('password');
-			const confirmPssw = document.getElementById('confirmPassword');
-			const submitBtn = document.getElementById('register');
-
-			confirmPssw.addEventListener('input', () => {
-				if (pssw.value === confirmPssw.value) {
-					pssw.style.border = '2px solid green';
-					confirmPssw.style.border = '2px solid green';
-					submitBtn.disabled = false;
-				} else {
-					pssw.style.border = '2px solid red';
-					confirmPssw.style.border = '2px solid red';
-					submitBtn.disabled = true;
-				}
-			});
-		</script>
-
-
+		
 		<!-- Footer -->
 		<footer id="footer">
 			<div class="inner">
@@ -85,6 +65,7 @@
 			</section>
 
 			<!-- Scripts -->
+			<script src="../assets/js/registrationError.js"></script>
 			<script src="../assets/js/jquery.min.js"></script>
 			<script src="../assets/js/jquery.scrollex.min.js"></script>
 			<script src="../assets/js/browser.min.js"></script>

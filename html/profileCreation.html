@@ -7,44 +7,35 @@
 <html>
 
 	<head>
-		<title>RuneterraDB | Home</title>
+		<title>RuneterraDB | Profile creation</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
-		<noscript>
-			<link rel="stylesheet" href="../assets/css/noscript.css" />
-		</noscript>
+		<link rel="stylesheet" href="../assets/css/form.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 	</head>
 
-	<body class="is-preload">
+	<body>
 
 		<!-- Header -->
 		<header id="header" class="alt">
 			<nav>
-				username to be displayed (or guest)
-				<a href="#menu">Menu</a>
+                Welcome new user! Please create your profile!
 			</nav>
 		</header>
-
-		<!-- Menu -->
-		<nav id="menu">
-			<div class="inner">
-				<h2>Menu</h2>
-				<ul class="links">
-					<li><a href="gtc.html">Guess the champion</a></li>
-					<li><a href="wiki.html">Wiki</a></li>
-					<li><a href="login.html">Log In</a></li>
-					<li><a href="registration.html">Registration</a></li>
-				</ul>
-				<a href="#" class="close">Close</a>
-			</div>
-		</nav>
 
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
-				<div class="logo"><img src="../sources/icon-runeterra.png" width="100" height="100"></div>
-				<h2 id="lol">RuneterraDB</h2>
+				<form action="../php/profileCreation.php" method="POST">
+                    <label for="summonerName" id="summonerName">Summoner name:</label>
+                    <input type="text" id="summonerName" name="summonerName" placeholder="Insert summoner name..." required>
+
+                    <label for="team" id="team">Team:</label>
+                    <input type="text" id="team" name="team" placeholder="Insert team you want to join..." required>
+
+					<input type="submit" id="createProfile" value="Create profile">
+				</form>
 			</div>
 		</section>
 
