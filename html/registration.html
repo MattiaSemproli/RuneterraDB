@@ -63,9 +63,11 @@
 
 			confirmPssw.addEventListener('input', () => {
 				if (pssw.value === confirmPssw.value) {
+					pssw.style.border = '2px solid green';
 					confirmPssw.style.border = '2px solid green';
 					submitBtn.disabled = false;
 				} else {
+					pssw.style.border = '2px solid red';
 					confirmPssw.style.border = '2px solid red';
 					submitBtn.disabled = true;
 				}
