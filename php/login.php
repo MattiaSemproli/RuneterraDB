@@ -20,6 +20,7 @@
             header("Location: ../html/index.html");
         } else {
             header("Location: ../html/login.html?error=true");
+            die();
         }
 
         /**
