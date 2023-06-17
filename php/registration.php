@@ -16,10 +16,11 @@
         
         $sql = "INSERT INTO user (username, password) VALUES ('$username', '$password')";
 
-        if ($conn->query($sql)->num_rows == 1) {
+        if ($conn->query($sql) === TRUE) {
             header("Location: ../html/profileCreation.html");
         } else {
             header("Location: ../html/registration.html?error=true");
+            die();
         }  
 
         /**
