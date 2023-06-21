@@ -29,6 +29,6 @@
          */ 
         mysqli_close($conn);
     } else {
-        header("Location: ../html/profileCreation.html");
+        header("Location: ../html/registration.html");
     }
 ?>
