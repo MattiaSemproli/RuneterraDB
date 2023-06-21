@@ -17,6 +17,7 @@
         $sql = "INSERT INTO user (username, password) VALUES ('$username', '$password')";
 
         if ($conn->query($sql) === TRUE) {
+            setcookie('user', $username, ['path' => '/php/']);
             header("Location: ../html/profileCreation.html");
         } else {
             header("Location: ../html/registration.html?error=true");
