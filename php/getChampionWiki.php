@@ -24,15 +24,6 @@
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            /*
-            echo "Name: " . $row["name"] . "<br>";
-            echo "Gender: " . $row["gender"] . "<br>";
-            echo "Role: " . $row["role"] . "<br>";
-            echo "Species: " . $row["species"] . "<br>";
-            echo "Resource: " . $row["resource"] . "<br>";
-            echo "Attack type: " . $row["attackType"] . "<br>";
-            echo "Region: " . $row["region"] . "<br>.<br>";
-            */
             array_push($champions, [$row["name"],
                                     $row["gender"],
                                     $row["role"],
