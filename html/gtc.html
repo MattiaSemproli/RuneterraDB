@@ -42,15 +42,7 @@
 		<!-- Center -->
 		<div id="guess-the-champion">
 			<form>
-				<input type="text" id="champion-name" name="champion-name" placeholder="Enter champion name ...."
-					list="client-list" autocomplete="off">
-				<datalist id="client-list">
-					<option value="fede">
-					<option value="franci">
-					<option value="giova">
-					<option value="gion">
-					<option value="jonny">
-				</datalist>
+				<input type="text" id="champion-name" name="champion-name" placeholder="Enter champion name ...." autocomplete="off">
 				<button type="submit" id="submit-Button" disabled>Submit</button>
 			</form>
 			<ul id="champions-list">
@@ -64,44 +56,94 @@
 				xhr.onload = function() {
 					if (xhr.status === 200) {
 						var chs = JSON.parse(xhr.responseText);
-						//da fare solo se il cookie randomChamp non esiste
-						extractRandomChampion(chs);
-						//metodo che crea una lista con solo tutti i nomi dei champ
+						if (!document.cookie.includes('randomChamp')) {
+							extractRandomChampion(chs);
+						}
+						generateChampionNamesCookie(chs);
+						loadChsOptions();
 					} else {
 						console.log('Error in the request: ' + xhr.status);
 					}
 				};
 				xhr.send();
 			});
-
+			
 			function extractRandomChampion(chs) {
-				//estrarre champ random
-				//settare un cookie col champ random
+				var rndId = Math.floor(Math.random() * chs.length);
+				var tomorrow = new Date();
+				tomorrow.setDate(new Date().getDate() + 1);
+				tomorrow.setHours(0, 0, 0, 0);
+				document.cookie = "randomChamp=" + chs[rndId] + "; expires=" + tomorrow.toUTCString() + "; path=/html/gtc.html";
+			}
+			
+			function generateChampionNamesCookie(chs) {
+				var nameList = Array();
+				chs.forEach(element => {
+					nameList.push(element[0]);
+				});
+				document.cookie = "nameChs=" + JSON.stringify(nameList) + "; path=/html/gtc.html";
+			} 
+
+			function loadChsOptions() {
+				const input = document.getElementById('champion-name');
+				var cookieValue = document.cookie
+										  .split('; ')
+										  .find(cookie => cookie.startsWith('nameChs='))
+										  ?.split('=')[1];
+				var options = Array();
+				if(cookieValue) {
+					JSON.parse(cookieValue).forEach(element => {	
+						options.push(element);
+					});
+				}
+				console.log(options);
+				input.setAttribute('list', options);
 			}
 
 			//da cambiare la lista di opzioni con quella caricata sopra
 			const form = document.querySelector('form');
 			const champsList = document.getElementById('champions-list');
 			const input = document.getElementById('champion-name');
-			const datalist = document.getElementById('client-list');
-			const options = Array.from(datalist.options).map(option => option.value);
+			//const datalist = document.getElementById('client-list');
 			const submitBtn = document.getElementById('submit-Button');
 
 			form.addEventListener('submit', event => {
 				event.preventDefault();
 
-				//rimuovere champ dalla lista quando inviato
+				var cookieValue = document.cookie
+										  .split('; ')
+										  .find(cookie => cookie.startsWith('nameChs='))
+										  ?.split('=')[1];
+				var chsNames = Array();
+				if(cookieValue) {
+					JSON.parse(cookieValue).forEach(element => {	
+						chsNames.push(element);
+					});
+					chsNames.splice(chsNames.indexOf(input.value), 1);
+					document.cookie = "nameChs=" + JSON.stringify(chsNames) + "; path=/html/gtc.html";
+				}
+				
+				//checkare se il campione è indovinato o meno
+				//scrivere in verde le cose uguali, in rosso le sbagliate
+
 				const newChampItem = document.createElement('li');
 				newChampItem.textContent = input.value;
 				champsList.appendChild(newChampItem);
 				form.reset();
-
-				//checkare se il campione è indovinato o meno
-				//scrivere in verde le cose uguali, in rosso le sbagliate
 			});
 
 			input.addEventListener('input', () => {
-				if (options.includes(input.value)) {
+				var cookieValue = document.cookie
+										  .split('; ')
+										  .find(cookie => cookie.startsWith('nameChs='))
+										  ?.split('=')[1];
+				var options = Array();
+				if(cookieValue) {
+					JSON.parse(cookieValue).forEach(element => {	
+						options.push(element.toLowerCase());
+					});
+				}
+				if (options.includes(input.value.toLowerCase())) {
 					submitBtn.disabled = false;
 				} else {
 					submitBtn.disabled = true;
