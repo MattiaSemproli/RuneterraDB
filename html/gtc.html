@@ -42,11 +42,11 @@
 		<!-- Center -->
 		<div id="guess-the-champion">
 			<form>
-				<input type="text" id="champion-name" name="champion-name" placeholder="Enter champion name ...." autocomplete="off">
+				<input type="text" id="champion-name" name="champion-name" placeholder="Enter champion name ...." list="champion-options" autocomplete="off">
+				<datalist id="champion-options"></datalist>
 				<button type="submit" id="submit-Button" disabled>Submit</button>
 			</form>
-			<ul id="champions-list">
-			</ul>
+			<ul id="champion-guessed" style="list-style-type: none; background-color: black; border-radius: 10px;"></ul>
 		</div>
 
 		<script>
@@ -85,7 +85,6 @@
 			} 
 
 			function loadChsOptions() {
-				const input = document.getElementById('champion-name');
 				var cookieValue = document.cookie
 										  .split('; ')
 										  .find(cookie => cookie.startsWith('nameChs='))
@@ -96,15 +95,22 @@
 						options.push(element);
 					});
 				}
-				console.log(options);
-				input.setAttribute('list', options);
+
+				while (champsList.firstChild) {
+					champsList.removeChild(champsList.firstChild);
+				}
+
+				options.forEach(option => {
+					const newOption = document.createElement('option');
+					newOption.value = option;
+					champsList.appendChild(newOption);
+				});
 			}
 
-			//da cambiare la lista di opzioni con quella caricata sopra
 			const form = document.querySelector('form');
-			const champsList = document.getElementById('champions-list');
+			const champsList = document.getElementById('champion-options');
+			const champsTyped = document.getElementById('champion-guessed');
 			const input = document.getElementById('champion-name');
-			//const datalist = document.getElementById('client-list');
 			const submitBtn = document.getElementById('submit-Button');
 
 			form.addEventListener('submit', event => {
@@ -123,13 +129,42 @@
 					document.cookie = "nameChs=" + JSON.stringify(chsNames) + "; path=/html/gtc.html";
 				}
 				
-				//checkare se il campione è indovinato o meno
-				//scrivere in verde le cose uguali, in rosso le sbagliate
+				var toGuess = document.cookie
+								 .split('; ')
+								 .find(cookie => cookie.startsWith('randomChamp='))
+								 ?.split('=')[1]
+								 .split(',');
 
-				const newChampItem = document.createElement('li');
-				newChampItem.textContent = input.value;
-				champsList.appendChild(newChampItem);
-				form.reset();
+				var guess = input.value.toLowerCase().split(' ');
+				for (var i = 0; i < guess.length; i++) {
+					guess[i] = guess[i].charAt(0).toUpperCase() + guess[i].slice(1);
+				}
+				var guess = guess.join(' ');
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', '../php/requestGuess.php?n=' + encodeURIComponent(guess), true);
+				xhr.onload = function() {
+					if (xhr.status === 200) {
+						var x = JSON.parse(xhr.responseText);
+						const newChampItem = document.createElement('li');
+						for (var i = 0; i < x.length; i++) {
+							if (x[i] === toGuess[i]) {
+								newChampItem.innerHTML+=('<span style="color: green">' + x[i] + '</span>, ');
+							} else {
+								newChampItem.innerHTML+=('<span style="color: red">' + x[i] + '</span>, ');
+							}
+						}
+						champsTyped.prepend(document.createElement('br'));
+						champsTyped.prepend(newChampItem);
+						champsTyped.prepend(document.createElement('br'));
+						form.reset();
+						loadChsOptions();
+						submitBtn.disabled = true;
+					} else {
+						console.log('Error in the request: ' + xhr.status);
+					}
+				};
+				xhr.send();
 			});
 
 			input.addEventListener('input', () => {
