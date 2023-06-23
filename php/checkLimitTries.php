@@ -1,7 +1,7 @@
 <?php
     session_start();
     $currentUser = $_SESSION['username'];
-    $currentDate = date("d-m-Y");
+    $currentDate = date("Y-m-d");
 
     function checkLimitTries() {
         require_once("connect.php");
@@ -27,11 +27,5 @@
         mysqli_close($conn);
 
         return $canPlay;
-    }
-
-    if(checkLimitTries()) {
-        header("Location: ../html/gtc.html");
-    } else {
-        header("Location: ../html/login.html");
     }
 ?>
