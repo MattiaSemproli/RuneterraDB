@@ -130,10 +130,10 @@
 				}
 				
 				var toGuess = document.cookie
-								 .split('; ')
-								 .find(cookie => cookie.startsWith('randomChamp='))
-								 ?.split('=')[1]
-								 .split(',');
+								      .split('; ')
+								      .find(cookie => cookie.startsWith('randomChamp='))
+								      ?.split('=')[1]
+								      .split(',');
 
 				var guess = input.value.toLowerCase().split(' ');
 				for (var i = 0; i < guess.length; i++) {
