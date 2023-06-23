@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(isset($_SESSION['username'])) {
-        header("Location: ../php/checkLimitTries.php");
+        header("Location: ../html/gtc.html");
     } else {
         header("Location: ../html/login.html");
     }
