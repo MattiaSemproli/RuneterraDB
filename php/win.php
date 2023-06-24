@@ -31,6 +31,14 @@
                 $sql2 = "UPDATE summoner
                          SET championsGuessed = championsGuessed + 1, score = score + $pts
                          WHERE username = '$user'";
+
+                $sql7 = "UPDATE summoner
+                         SET summoner.rank = (SELECT MAX(`rank`.idRank)
+                                             FROM `rank`
+                                             WHERE `rank`.rankGoal <= summoner.score)
+                         WHERE summoner.username = '$user'";
+                $conn->query($sql7);
+
                 if ($conn->query($sql2) === TRUE) {
                     $sql3 = "SELECT championsGuessed
                              FROM summoner

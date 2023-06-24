@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+	<head>
+		<title>RuneterraDB | Wiki</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="stylesheet" href="../assets/css/centerBox.css" />
+        <link rel="stylesheet" href="../assets/css/ranking.css" />
+		<noscript>
+			<link rel="stylesheet" href="../assets/css/noscript.css" />
+		</noscript>
+	</head>
+
+	<body>
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<nav>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<div class="inner">
+				<h2>Menu</h2>
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="../php/gtc.php">Guess the champion</a></li>
+				</ul>
+				<a href="#" class="close">Close</a>
+			</div>
+		</nav>
+
+		<!-- Center left -->
+		<div id="leftBox">
+            <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Guesses</th>
+                    <th>Team</th>
+                    <th>Rank</th>
+                  </tr>
+                </thead>
+                <tbody id="summonerTableBody">
+                </tbody>
+              </table>
+		</div>
+
+		<!-- Center right -->
+		<div id="rightBox">
+            <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Acronym</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody id="teamTableBody">
+                </tbody>
+              </table>
+		</div>
+		
+		<script>
+            const leftBox = document.getElementById('summonerTableBody');
+            const rightBox = document.getElementById('teamTableBody');
+
+            window.addEventListener('load', function() {
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', '../php/getRankings.php', true);
+				xhr.onload = function() {
+					if (xhr.status === 200) {
+						var res = JSON.parse(xhr.responseText);
+                        var summoner = res['summoner'];
+                        var team = res['team'];
+                        loadRankings(summoner, team);
+					} else {
+						console.log('Error in the request: ' + xhr.status);
+					}
+				};
+				xhr.send();
+			});
+
+            function loadRankings(summoner, team) {
+                load(summoner, leftBox);
+                load(team, rightBox);
+            }
+
+            function load(val, box) {
+                val.forEach((element, index) => {
+                    const newRow = document.createElement('tr');
+                    Object.entries(element).forEach(([key, value]) => {
+                        const newCell = document.createElement('td');
+                        newCell.textContent = value;
+                        newRow.appendChild(newCell);
+                    });
+                    box.appendChild(newRow);
+                });
+            }
+        </script>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<li>&copy; All rights reserved to Mattia Semproli & Martino Pagliarani</li>
+				</ul>
+			</div>
+			</section>
+
+			<!-- Scripts -->
+            <script src="../assets/js/menuGenerator.js"></script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+
+</html>

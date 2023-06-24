@@ -1,0 +1,13 @@
+table th {
+    text-align: center;
+    padding: 10px;
+}
+thead th {
+    background-color: black;
+    position: sticky;
+    top: 0;
+}
+td {
+    text-align: center;
+    padding: 10px;
+}
