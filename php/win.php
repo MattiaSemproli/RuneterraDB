@@ -1,17 +1,33 @@
 <?php
+    require_once("connect.php");
+        
+    session_start();
+    $currentUser = $_SESSION['username'];
+    $currentDate = date("Y-m-d");
+
+    $sql = "SELECT game.date
+            FROM game
+            WHERE username = '$currentUser'
+            AND game.date = '$currentDate'
+            GROUP BY game.date
+            HAVING COUNT(*) < 5";
+
+    if ($result = mysqli_query($conn, $sql)) {
+        if(mysqli_num_rows($result) > 0) {
+            $canPlay = 'true';
+        } else {
+            $canPlay = 'false';
+        }
+    }
+
+    if($canPlay == 'true') {
         $data = $_GET["data"];
         $jsonData = json_decode($data, true);
-    
-        session_start();
+        
         $user = $_SESSION['username'];
         $toGuess = $jsonData[0];
         $tries = $jsonData[1];
         $date = date("Y-m-d");
-    
-        /**
-         * Require the file with connection variables.
-         */ 
-        require_once 'connect.php';
     
         $sql = "INSERT INTO game (numberOfTry, date, nameToGuess, username) VALUES ($tries, '$date', '$toGuess', '$user')";
     
@@ -28,14 +44,14 @@
             $sql2 = "UPDATE summoner
                      SET championsGuessed = championsGuessed + 1, score = score + $pts
                      WHERE username = '$user'";
-
+    
             $sql7 = "UPDATE summoner
                      SET summoner.rank = (SELECT MAX(`rank`.idRank)
                                          FROM `rank`
                                          WHERE `rank`.rankGoal <= summoner.score)
                      WHERE summoner.username = '$user'";
             $conn->query($sql7);
-
+    
             if ($conn->query($sql2) === TRUE) {
                 $sql3 = "SELECT championsGuessed
                          FROM summoner
@@ -86,4 +102,8 @@
          * Close the connection.
          */ 
         mysqli_close($conn);
+    } else {
+        header("Location: ../html/win.html");
+        die();
+    }
 ?>

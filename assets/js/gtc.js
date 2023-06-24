@@ -82,23 +82,24 @@ const submitBtn = document.getElementById('submit-Button');
 form.addEventListener('submit', event => {
     event.preventDefault();
 
-    var cookieValue = getRightCookie('nameChs');
-    var chsNames = Array();
-    if(cookieValue) {
-        JSON.parse(cookieValue).forEach(element => {	
-            chsNames.push(element);
-        });
-        chsNames.splice(chsNames.indexOf(input.value), 1);
-        document.cookie = sessionStorage.getItem('logged') + "nameChs=" + JSON.stringify(chsNames) + "; expires=" + getTomorrowDate() + "; path=/html/gtc.html";
-    }
-    
     var toGuess = getRightCookie('randomChamp').split(',');
     var guess = input.value.toLowerCase().split(' ');
     for (var i = 0; i < guess.length; i++) {
         guess[i] = guess[i].charAt(0).toUpperCase() + guess[i].slice(1);
     }
     var guess = guess.join(' ');
-    
+
+    var cookieValue = getRightCookie('nameChs');
+    var chsNames = Array();
+    if(cookieValue) {
+        JSON.parse(cookieValue).forEach(element => {
+            if(element != guess) {
+                chsNames.push(element);
+            }
+        });
+    }
+    document.cookie = sessionStorage.getItem('logged') + "nameChs=" + JSON.stringify(chsNames) + "; expires=" + getTomorrowDate() + "; path=/html/gtc.html";
+
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../php/requestGuess.php?n=' + encodeURIComponent(guess), true);
     xhr.onload = function() {

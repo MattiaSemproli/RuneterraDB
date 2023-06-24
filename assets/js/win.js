@@ -10,7 +10,7 @@ window.addEventListener('load', function() {
             } else {
                 paragraph.textContent = 'You won!';
                 const text = document.createElement('div');
-                text.textContent = 'but you are out of tries! Come back tomorrow for more points!';
+                text.textContent = 'you are out of tries! Come back tomorrow for more points!';
                 text.style.textAlign = 'center';
                 text.id = 'lol';
                 text.style.removeProperty('font-size');

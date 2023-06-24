@@ -1,6 +1,6 @@
 <?php
     require_once("connect.php");
-        
+    
     session_start();
     $currentUser = $_SESSION['username'];
     $currentDate = date("Y-m-d");
