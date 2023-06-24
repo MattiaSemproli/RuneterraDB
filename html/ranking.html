@@ -1,13 +1,9 @@
 <!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 
 	<head>
-		<title>RuneterraDB | Wiki</title>
+		<title>RuneterraDB | Ranking</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
@@ -20,14 +16,12 @@
 
 	<body>
 
-		<!-- Header -->
 		<header id="header" class="alt">
 			<nav>
 				<a href="#menu">Menu</a>
 			</nav>
 		</header>
 
-		<!-- Menu -->
 		<nav id="menu">
 			<div class="inner">
 				<h2>Menu</h2>
@@ -39,7 +33,6 @@
 			</div>
 		</nav>
 
-		<!-- Center left -->
 		<div id="leftBox">
             <table>
                 <thead>
@@ -56,7 +49,6 @@
               </table>
 		</div>
 
-		<!-- Center right -->
 		<div id="rightBox">
             <table>
                 <thead>
@@ -70,46 +62,7 @@
                 </tbody>
               </table>
 		</div>
-		
-		<script>
-            const leftBox = document.getElementById('summonerTableBody');
-            const rightBox = document.getElementById('teamTableBody');
 
-            window.addEventListener('load', function() {
-				var xhr = new XMLHttpRequest();
-				xhr.open('GET', '../php/getRankings.php', true);
-				xhr.onload = function() {
-					if (xhr.status === 200) {
-						var res = JSON.parse(xhr.responseText);
-                        var summoner = res['summoner'];
-                        var team = res['team'];
-                        loadRankings(summoner, team);
-					} else {
-						console.log('Error in the request: ' + xhr.status);
-					}
-				};
-				xhr.send();
-			});
-
-            function loadRankings(summoner, team) {
-                load(summoner, leftBox);
-                load(team, rightBox);
-            }
-
-            function load(val, box) {
-                val.forEach((element, index) => {
-                    const newRow = document.createElement('tr');
-                    Object.entries(element).forEach(([key, value]) => {
-                        const newCell = document.createElement('td');
-                        newCell.textContent = value;
-                        newRow.appendChild(newCell);
-                    });
-                    box.appendChild(newRow);
-                });
-            }
-        </script>
-
-		<!-- Footer -->
 		<footer id="footer">
 			<div class="inner">
 				<ul class="copyright">
@@ -118,7 +71,7 @@
 			</div>
 			</section>
 
-			<!-- Scripts -->
+			<script src="../assets/js/ranking.js"></script>
             <script src="../assets/js/menuGenerator.js"></script>
 			<script src="../assets/js/jquery.min.js"></script>
 			<script src="../assets/js/jquery.scrollex.min.js"></script>

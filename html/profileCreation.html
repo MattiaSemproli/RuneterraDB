@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 
 	<head>
@@ -17,14 +13,12 @@
 
 	<body>
 
-		<!-- Header -->
 		<header id="header" class="alt">
 			<nav>
                 Welcome new user! Please create your profile!
 			</nav>
 		</header>
 
-		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
 				<form action="../php/profileCreation.php" method="POST">
@@ -39,60 +33,6 @@
 			</div>
 		</section>
 
-		<script>
-			window.addEventListener('load', function() {
-				var xhr = new XMLHttpRequest();
-				xhr.open('GET', '../php/availableTeam.php', true);
-				xhr.onload = function() {
-					if (xhr.status === 200) {
-						var teams = JSON.parse(xhr.responseText);
-						document.cookie = "teams=" + JSON.stringify(teams) + "; path=/html/profileCreation.html;";
-						process(teams);
-					} else {
-						console.log('Error in the request: ' + xhr.status);
-					}
-				};
-				xhr.send();
-			});
-
-			function process(teams) {
-				var t = document.getElementById('team');
-				if(teams.length == 0) {
-					t.setAttribute('placeholder', 'No teams available');
-				} else {	
-					var availableTeamsPH = 'Available teams: ' + teams.join(', '); //PH = placeholder.
-					t.setAttribute('placeholder', availableTeamsPH);
-				}
-			}
-
-			const input = document.getElementById('team');
-			const submitBtn = document.getElementById('createProfile');
-
-			input.addEventListener('input', () => {
-				var cookieValue = document.cookie
-										  .split('; ')
-										  .find(cookie => cookie.startsWith('teams='))
-										  ?.split('=')[1];
-				var freeTeams = Array();
-				if(cookieValue)
-					JSON.parse(cookieValue).map(team => team.toLowerCase().replace(/\s+/g, '')).forEach(element => {	
-						freeTeams.push(element);
-					});
-
-				if (freeTeams.includes(input.value.toLowerCase().replace(/\s+/g, ''))) {
-					submitBtn.disabled = false;
-				} else {
-					submitBtn.disabled = true;
-				}
-			});
-
-			//clear the cookie before leaving the page.
-			window.onbeforeunload = function() {
-				document.cookie = "teams=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/html/profileCreation.html;";
-			};
-		</script>
-
-		<!-- Footer -->
 		<footer id="footer">
 			<div class="inner">
 				<ul class="copyright">
@@ -101,7 +41,7 @@
 			</div>
 			</section>
 
-			<!-- Scripts -->
+			<script src="../assets/js/profileCreation.js"></script>
 			<script src="../assets/js/jquery.min.js"></script>
 			<script src="../assets/js/jquery.scrollex.min.js"></script>
 			<script src="../assets/js/browser.min.js"></script>
