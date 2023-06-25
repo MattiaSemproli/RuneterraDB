@@ -108,7 +108,7 @@ CREATE TABLE `complete` (
 
 LOCK TABLES `complete` WRITE;
 /*!40000 ALTER TABLE `complete` DISABLE KEYS */;
-INSERT INTO `complete` VALUES (0,'mttia',0),(0,'mttia',1),(0,'mttia',2),(0,'mttia',3),(0,'mttia',4),(0,'mttia',5),(0,'mttia',6),(0,'mttia',7),(0,'mttia',8),(0,'paglia',0),(0,'paglia',1),(0,'paglia',2),(0,'paglia',3),(0,'paglia',4),(0,'paglia',5),(0,'paglia',6),(0,'paglia',7),(0,'paglia',8);
+INSERT INTO `complete` VALUES (0,'DEMACIA',0),(0,'DEMACIA',1),(0,'DEMACIA',2),(0,'DEMACIA',3),(0,'DEMACIA',4),(0,'DEMACIA',5),(0,'DEMACIA',6),(0,'DEMACIA',7),(0,'DEMACIA',8),(0,'Diego',0),(0,'Diego',1),(0,'Diego',2),(0,'Diego',3),(0,'Diego',4),(0,'Diego',5),(0,'Diego',6),(0,'Diego',7),(0,'Diego',8),(0,'mttia',0),(0,'mttia',1),(0,'mttia',2),(0,'mttia',3),(0,'mttia',4),(0,'mttia',5),(0,'mttia',6),(0,'mttia',7),(0,'mttia',8),(0,'paglia',0),(0,'paglia',1),(0,'paglia',2),(0,'paglia',3),(0,'paglia',4),(0,'paglia',5),(0,'paglia',6),(0,'paglia',7),(0,'paglia',8);
 /*!40000 ALTER TABLE `complete` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `game` (
   PRIMARY KEY (`idGame`),
   KEY `FK_game_summoner_idx` (`username`),
   CONSTRAINT `FK_game_summoner` FOREIGN KEY (`username`) REFERENCES `summoner` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `game` (
 
 LOCK TABLES `game` WRITE;
 /*!40000 ALTER TABLE `game` DISABLE KEYS */;
-INSERT INTO `game` VALUES (4,1,'2023-06-24','Caitlyn','mttia'),(5,6,'2023-06-24','Alistar','paglia'),(6,1,'2023-06-24','Leona','Diego'),(7,2,'2023-06-24','Nunu & Willump','mttia'),(8,1,'2023-06-24','Azir','mttia');
+INSERT INTO `game` VALUES (4,1,'2023-06-24','Caitlyn','mttia'),(5,6,'2023-06-24','Alistar','paglia'),(6,1,'2023-06-24','Leona','Diego'),(7,2,'2023-06-24','Nunu & Willump','mttia'),(8,1,'2023-06-24','Azir','mttia'),(9,10,'2023-06-24','Talon','mttia'),(10,11,'2023-06-24','Aurelion Sol','mttia');
 /*!40000 ALTER TABLE `game` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +200,6 @@ DROP TABLE IF EXISTS `mission`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mission` (
   `idMission` int NOT NULL AUTO_INCREMENT,
-  `rank` varchar(32) NOT NULL,
   `description` varchar(1000) NOT NULL,
   `goal` int NOT NULL,
   `points` int NOT NULL,
@@ -214,7 +213,7 @@ CREATE TABLE `mission` (
 
 LOCK TABLES `mission` WRITE;
 /*!40000 ALTER TABLE `mission` DISABLE KEYS */;
-INSERT INTO `mission` VALUES (0,'Iron','Guess a total of 10 champions.',10,14),(1,'Bronze','Guess a total of 25 champions.',25,35),(2,'Silver','Guess a total of 45 champions.',45,56),(3,'Gold','Guess a total of 70 champions.',70,98),(4,'Platinum','Guess a total of 100 champions.',100,140),(5,'Diamond','Guess a total of 135 champions.',135,189),(6,'Master','Guess a total of 175 champions.',175,245),(7,'GrandMaster','Guess a total of 220 champions.',220,308),(8,'Challenger','Guess a total of 270 champions.',270,378);
+INSERT INTO `mission` VALUES (0,'Guess a total of 10 champions.',10,14),(1,'Guess a total of 25 champions.',25,35),(2,'Guess a total of 45 champions.',45,56),(3,'Guess a total of 70 champions.',70,98),(4,'Guess a total of 100 champions.',100,140),(5,'Guess a total of 135 champions.',135,189),(6,'Guess a total of 175 champions.',175,245),(7,'Guess a total of 220 champions.',220,308),(8,'Guess a total of 270 champions.',270,378);
 /*!40000 ALTER TABLE `mission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,7 +400,7 @@ CREATE TABLE `summoner` (
 
 LOCK TABLES `summoner` WRITE;
 /*!40000 ALTER TABLE `summoner` DISABLE KEYS */;
-INSERT INTO `summoner` VALUES ('Diego','proli',5,1,1,0),('mttia','m ttia',15,3,0,0),('paglia','ThePaglia02',3,1,0,0);
+INSERT INTO `summoner` VALUES ('DEMACIA','Il Re',0,0,3,0),('Diego','proli',5,1,1,0),('mttia','m ttia',19,5,0,0),('paglia','ThePaglia02',3,1,0,0);
 /*!40000 ALTER TABLE `summoner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -427,7 +426,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (0,'SK Telecom T1','T1',18),(1,'Clown 9','C9',5),(2,'G2 Esports','G2',0),(3,'Edward Gaming','EDG',0);
+INSERT INTO `team` VALUES (0,'SK Telecom T1','T1',22),(1,'Clown 9','C9',5),(2,'G2 Esports','G2',0),(3,'Edward Gaming','EDG',0);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,7 +451,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Diego','diego1234',0),('mttia','mttia1234',1),('paglia','paglia1234',1);
+INSERT INTO `user` VALUES ('DEMACIA','1',0),('Diego','diego1234',0),('mttia','mttia1234',1),('paglia','paglia1234',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -465,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-24 23:18:19
+-- Dump completed on 2023-06-25 17:01:11

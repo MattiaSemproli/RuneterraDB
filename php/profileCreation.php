@@ -17,6 +17,11 @@
                          WHERE LOWER(REPLACE(team.nameTeam, ' ', '')) = '$team'))";
 
         if ($conn->query($sql) === TRUE) {
+            for ($i = 0; $i < 9; $i++) {
+                $addMission = "INSERT INTO complete (username, idMission) 
+                               VALUES ('$user', '$i')";
+                $conn->query($addMission);
+            }
             setcookie("user", "", time() - 3600);
             header("Location: ../html/login.html");
         } else {

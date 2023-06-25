@@ -8,15 +8,18 @@
          */ 
         require_once 'connect.php';
 
+        $users = "SELECT username FROM user";
+        $result = $conn->query($users);
+
         //Prevents sql injections
         $username = stripcslashes($username);
         $password = stripcslashes($password);
         $username = mysqli_real_escape_string($conn, $username);
-        $password = mysqli_real_escape_string($conn, $password);        
+        $password = mysqli_real_escape_string($conn, $password);
         
         $sql = "INSERT INTO user (username, password) VALUES ('$username', '$password')";
 
-        if ($conn->query($sql) === TRUE) {
+        if (!in_array($username, $result->fetch_array()) && $conn->query($sql) === TRUE) {
             setcookie('user', $username, ['path' => '/php/']);
             header("Location: ../html/profileCreation.html");
         } else {
