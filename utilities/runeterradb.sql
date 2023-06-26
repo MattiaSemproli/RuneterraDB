@@ -91,7 +91,7 @@ DROP TABLE IF EXISTS `complete`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `complete` (
-  `isComplete` tinyint(1) DEFAULT '0',
+  `isCompleted` tinyint(1) DEFAULT '0',
   `username` varchar(16) NOT NULL,
   `idMission` int NOT NULL,
   PRIMARY KEY (`username`,`idMission`),
@@ -108,7 +108,7 @@ CREATE TABLE `complete` (
 
 LOCK TABLES `complete` WRITE;
 /*!40000 ALTER TABLE `complete` DISABLE KEYS */;
-INSERT INTO `complete` VALUES (0,'DEMACIA',0),(0,'DEMACIA',1),(0,'DEMACIA',2),(0,'DEMACIA',3),(0,'DEMACIA',4),(0,'DEMACIA',5),(0,'DEMACIA',6),(0,'DEMACIA',7),(0,'DEMACIA',8),(0,'Diego',0),(0,'Diego',1),(0,'Diego',2),(0,'Diego',3),(0,'Diego',4),(0,'Diego',5),(0,'Diego',6),(0,'Diego',7),(0,'Diego',8),(0,'mttia',0),(0,'mttia',1),(0,'mttia',2),(0,'mttia',3),(0,'mttia',4),(0,'mttia',5),(0,'mttia',6),(0,'mttia',7),(0,'mttia',8),(0,'paglia',0),(0,'paglia',1),(0,'paglia',2),(0,'paglia',3),(0,'paglia',4),(0,'paglia',5),(0,'paglia',6),(0,'paglia',7),(0,'paglia',8);
+INSERT INTO `complete` VALUES (0,'DEMACIA',0),(0,'DEMACIA',1),(0,'DEMACIA',2),(0,'DEMACIA',3),(0,'DEMACIA',4),(0,'DEMACIA',5),(0,'DEMACIA',6),(0,'DEMACIA',7),(0,'DEMACIA',8),(0,'Diego',0),(0,'Diego',1),(0,'Diego',2),(0,'Diego',3),(0,'Diego',4),(0,'Diego',5),(0,'Diego',6),(0,'Diego',7),(0,'Diego',8),(1,'mttia',0),(0,'mttia',1),(0,'mttia',2),(0,'mttia',3),(0,'mttia',4),(0,'mttia',5),(0,'mttia',6),(0,'mttia',7),(0,'mttia',8),(0,'paglia',0),(0,'paglia',1),(0,'paglia',2),(0,'paglia',3),(0,'paglia',4),(0,'paglia',5),(0,'paglia',6),(0,'paglia',7),(0,'paglia',8);
 /*!40000 ALTER TABLE `complete` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `game` (
   PRIMARY KEY (`idGame`),
   KEY `FK_game_summoner_idx` (`username`),
   CONSTRAINT `FK_game_summoner` FOREIGN KEY (`username`) REFERENCES `summoner` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `game` (
 
 LOCK TABLES `game` WRITE;
 /*!40000 ALTER TABLE `game` DISABLE KEYS */;
-INSERT INTO `game` VALUES (4,1,'2023-06-24','Caitlyn','mttia'),(5,6,'2023-06-24','Alistar','paglia'),(6,1,'2023-06-24','Leona','Diego'),(7,2,'2023-06-24','Nunu & Willump','mttia'),(8,1,'2023-06-24','Azir','mttia'),(9,10,'2023-06-24','Talon','mttia'),(10,11,'2023-06-24','Aurelion Sol','mttia');
+INSERT INTO `game` VALUES (4,1,'2023-06-24','Caitlyn','mttia'),(5,6,'2023-06-24','Alistar','paglia'),(6,1,'2023-06-24','Leona','Diego'),(7,2,'2023-06-24','Nunu & Willump','mttia'),(8,1,'2023-06-24','Azir','mttia'),(9,10,'2023-06-24','Talon','mttia'),(10,11,'2023-06-24','Aurelion Sol','mttia'),(11,1,'2023-06-26','Fizz','mttia'),(12,1,'2023-06-26','Dr. Mundo','mttia'),(13,1,'2023-06-26','Samira','mttia'),(14,1,'2023-06-26','Ashe','mttia'),(15,1,'2023-06-26','Samira','mttia');
 /*!40000 ALTER TABLE `game` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,7 +400,7 @@ CREATE TABLE `summoner` (
 
 LOCK TABLES `summoner` WRITE;
 /*!40000 ALTER TABLE `summoner` DISABLE KEYS */;
-INSERT INTO `summoner` VALUES ('DEMACIA','Il Re',0,0,3,0),('Diego','proli',5,1,1,0),('mttia','m ttia',19,5,0,0),('paglia','ThePaglia02',3,1,0,0);
+INSERT INTO `summoner` VALUES ('DEMACIA','Il Re',0,0,3,0),('Diego','proli',5,1,1,0),('mttia','m ttia',44,10,0,1),('paglia','ThePaglia02',3,1,0,0);
 /*!40000 ALTER TABLE `summoner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,7 +426,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (0,'SK Telecom T1','T1',22),(1,'Clown 9','C9',5),(2,'G2 Esports','G2',0),(3,'Edward Gaming','EDG',0);
+INSERT INTO `team` VALUES (0,'SK Telecom T1','T1',47),(1,'Clown 9','C9',5),(2,'G2 Esports','G2',0),(3,'Edward Gaming','EDG',0);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-25 17:01:11
+-- Dump completed on 2023-06-26  3:51:26

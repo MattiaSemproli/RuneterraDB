@@ -42,7 +42,17 @@ window.addEventListener('load', function() {
 
 function extractRandomChampion(chs) {
     var rndId = Math.floor(Math.random() * chs.length);
-    document.cookie = sessionStorage.getItem('logged') + "randomChamp=" + chs[rndId] + "; expires=" + getTomorrowDate() + "; path=/html/gtc.html";
+    var random = new XMLHttpRequest();
+    random.open('GET', '../php/requestRandomChamp.php?x=' + encodeURIComponent(rndId), true);
+    random.onload = function() {
+        if (random.status === 200) {
+            var rndChamp = JSON.parse(random.responseText);
+            document.cookie = sessionStorage.getItem('logged') + "randomChamp=" + rndChamp + "; expires=" + getTomorrowDate() + "; path=/html/gtc.html";
+        } else {
+            console.log('Error in the request: ' + random.status);
+        }
+    };
+    random.send();
 }
 
 function generateChampionNamesCookie(chs) {

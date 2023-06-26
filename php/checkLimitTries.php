@@ -5,15 +5,15 @@
     $currentUser = $_SESSION['username'];
     $currentDate = date("Y-m-d");
 
-    $sql = "SELECT game.date
+    $sql = "SELECT COUNT(game.date) AS numberOfGames
             FROM game
             WHERE username = '$currentUser'
             AND game.date = '$currentDate'
-            GROUP BY game.date
-            HAVING COUNT(*) < 5";
+            GROUP BY game.date";
 
     if ($result = mysqli_query($conn, $sql)) {
-        if(mysqli_num_rows($result) > 0) {
+        $value = $result->fetch_assoc()['numberOfGames'];
+        if($value < 5 || $result->num_rows < 1) {
             $canPlay = 'true';
         } else {
             $canPlay = 'false';

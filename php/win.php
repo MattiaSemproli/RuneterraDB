@@ -5,15 +5,15 @@
     $currentUser = $_SESSION['username'];
     $currentDate = date("Y-m-d");
 
-    $sql = "SELECT game.date
+    $sql = "SELECT COUNT(game.date) AS numberOfGames
             FROM game
             WHERE username = '$currentUser'
             AND game.date = '$currentDate'
-            GROUP BY game.date
-            HAVING COUNT(*) < 5";
+            GROUP BY game.date";
 
     if ($result = mysqli_query($conn, $sql)) {
-        if(mysqli_num_rows($result) > 0) {
+        $value = $result->fetch_assoc()['numberOfGames'];
+        if($value < 5 || $result->num_rows < 1) {
             $canPlay = 'true';
         } else {
             $canPlay = 'false';
@@ -61,26 +61,41 @@
                          FROM mission
                          WHERE idMission = (SELECT MIN(idMission) 
                                             FROM complete 
-                                            WHERE isComplete = 0 
+                                            WHERE isCompleted = 0 
                                             AND username = '$user')";
                 $goal = $conn->query($sql4)->fetch_array()[0];
                 if($numberOfChsGuessed == $goal) {
                     $sql5 = "UPDATE complete
-                             SET isComplete = 1
-                             WHERE idMission = (SELECT MIN(idMission) 
-                                                FROM complete 
-                                                WHERE isComplete = 0 
-                                                AND username = '$user')";
+                             SET isCompleted = 1
+                             WHERE idMission = (
+                                 SELECT idMission
+                                 FROM (
+                                     SELECT idMission
+                                     FROM complete
+                                     WHERE isCompleted = 0
+                                     AND username = '$user'
+                                     ORDER BY idMission
+                                     LIMIT 1
+                                 ) AS subquery
+                             )
+                             AND username = '$user'";
+                    
                     $conn->query($sql5);
                     $sql6 = "UPDATE summoner
                              SET score = score + (SELECT points
                                                   FROM mission
                                                   WHERE idMission = (SELECT MAX(idMission)
                                                                      FROM complete
-                                                                     WHERE isComplete = 1 
+                                                                     WHERE isCompleted = 1 
                                                                      AND username = '$user'))
                              WHERE username = '$user'";
                     if ($conn->query($sql6) === TRUE) {
+                        $sql7 = "UPDATE summoner
+                                 SET summoner.rank = (SELECT MAX(`rank`.idRank)
+                                                     FROM `rank`
+                                                     WHERE `rank`.rankGoal <= summoner.score)
+                                 WHERE summoner.username = '$user'";
+                        $conn->query($sql7);
                         header("Location: ../html/win.html");
                     } else {
                         header("Location: ../html/gtc.html");
