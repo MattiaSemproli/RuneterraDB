@@ -142,6 +142,31 @@ INSERT INTO `game` VALUES (4,1,'2023-06-24','Caitlyn','mttia'),(5,6,'2023-06-24'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `gamepoints`
+--
+
+DROP TABLE IF EXISTS `gamepoints`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gamepoints` (
+  `id` int NOT NULL,
+  `point` int DEFAULT NULL,
+  `requirements` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gamepoints`
+--
+
+LOCK TABLES `gamepoints` WRITE;
+/*!40000 ALTER TABLE `gamepoints` DISABLE KEYS */;
+INSERT INTO `gamepoints` VALUES (0,5,5),(1,3,10),(2,1,15);
+/*!40000 ALTER TABLE `gamepoints` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `gender`
 --
 
@@ -431,6 +456,29 @@ INSERT INTO `team` VALUES (0,'SK Telecom T1','T1',47),(1,'Clown 9','C9',5),(2,'G
 UNLOCK TABLES;
 
 --
+-- Table structure for table `try`
+--
+
+DROP TABLE IF EXISTS `try`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `try` (
+  `idGame` int NOT NULL,
+  `nameTried` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idGame`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `try`
+--
+
+LOCK TABLES `try` WRITE;
+/*!40000 ALTER TABLE `try` DISABLE KEYS */;
+/*!40000 ALTER TABLE `try` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -464,4 +512,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-26  3:51:26
+-- Dump completed on 2023-08-27 11:35:13
